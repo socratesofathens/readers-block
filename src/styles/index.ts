@@ -8,9 +8,16 @@ export const Grid = styled.div`
   height: 100vmin;
 `
 
-export const Cell = styled.div`
+interface CellProps {
+  readonly reading: boolean
+}
+
+export const Cell = styled.div<CellProps>`
   width: 5vmin;
   height: 5vmin;
-  background: lightgray;
+  background: ${props => props.reading ? 'blue' : 'lightgray'};
   border: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `
