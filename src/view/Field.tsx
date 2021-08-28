@@ -1,5 +1,5 @@
 import Row from '../view/Row'
-import { Grid } from '../styles'
+import Grid from '../styles/Grid'
 
 export default function Field (
   { field }: { field: string[][] }

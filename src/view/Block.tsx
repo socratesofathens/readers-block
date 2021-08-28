@@ -2,7 +2,7 @@ import { useContext } from 'react'
 
 import readerContext from '../context/reader'
 
-import { Cell } from '../styles'
+import Cell from '../styles/Cell'
 
 export default function Block (
   { letter, rowIndex, columnIndex }: {
