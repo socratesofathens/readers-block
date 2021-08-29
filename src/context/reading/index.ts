@@ -1,5 +1,9 @@
 import { createContext } from 'react'
 
-import READER from '../../lib/reading'
+import READING from '../../lib/reading'
 
-export default createContext(READER)
+import { Reading } from '../../types'
+
+const initial: Reading = READING
+
+export default createContext(initial)

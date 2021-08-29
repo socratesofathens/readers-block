@@ -1,10 +1,12 @@
+export type Definition = string | undefined | null
+
 export interface Reading {
   row: number
   start: number
   end: number
-  word?: boolean
+  definition?: Definition
 }
 
-export interface Game {
-  field: string[][]
+export interface Field {
+  rows: string[][]
 }

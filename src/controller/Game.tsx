@@ -1,15 +1,17 @@
-import ReadingProvider from '../context/reading/Provider'
+import { useContext } from 'react'
 
-import useGame from '../use/game'
+import fieldContext from '../context/field'
+
+import ReadingProvider from '../context/reading/Provider'
 
 import FieldView from '../view/Field'
 
 export default function Game (): JSX.Element {
-  const { field } = useGame()
+  const { rows } = useContext(fieldContext)
 
   return (
     <ReadingProvider>
-      <FieldView field={field} />
+      <FieldView rows={rows} />
     </ReadingProvider>
   )
 }

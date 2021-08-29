@@ -1,25 +1,31 @@
 import { useContext } from 'react'
 
+import fieldContext from '../context/field'
 import readingContext from '../context/reading'
 
-import Cell from '../styles/Cell'
+import Square from '../view/Square'
 
 export default function Block (
-  { letter, rowIndex, columnIndex }: {
-    letter: string
+  { rowIndex, columnIndex }: {
     rowIndex: number
     columnIndex: number
   }
 ): JSX.Element {
+  const field = useContext(fieldContext)
   const reading = useContext(readingContext)
 
-  const row = reading.row === rowIndex
-  const start = row && reading.start <= columnIndex
-  const isReading = start && reading.end >= columnIndex
+  const readingRow = reading.row === rowIndex
+  const readingColumn = readingRow && reading.start <= columnIndex
+  const isReading = readingColumn && reading.end >= columnIndex
+
+  const row = field.rows[rowIndex]
+  const letter = row[columnIndex]
 
   return (
-    <Cell isReading={isReading}>
-      {letter}
-    </Cell>
+    <Square
+      isReading={isReading}
+      definition={reading.definition}
+      letter={letter}
+    />
   )
 }

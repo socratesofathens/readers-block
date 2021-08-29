@@ -1,9 +1,11 @@
 import styled from 'styled-components'
 
+import FIELD_SIZE from '../lib/field/size'
+
 export default styled.div`
   display: grid;
-  grid-template-columns: repeat(13, 1fr);
-  grid-template-rows: repeat(20, 1fr);
+  grid-template-columns: repeat(${FIELD_SIZE.width}, 1fr);
+  grid-template-rows: repeat(${FIELD_SIZE.height}, 1fr);
   width: 65vmin;
   height: 100vmin;
 `

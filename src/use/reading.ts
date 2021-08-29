@@ -1,20 +1,44 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 
-import nextReading from '../lib/reading/next'
+import fieldContext from '../context/field'
 
-import READING from '../lib/reading'
+import NextReading from '../lib/reading/next'
+import NewReading from '../lib/reading/new'
 
-import { Reading } from '../types'
+import { Definition, Reading } from '../types'
 
-export default function useReader (): Reading {
-  const [reader, setReader] = useState<Reading>(READING)
+export default function useReading (): Reading {
+  const field = useContext(fieldContext)
 
-  function tick (): void {
-    setReader(nextReading)
-  }
+  const newReading = NewReading({ field })
+
+  const [reading, setReading] = useState<Reading>(newReading)
+
+  const { definition } = reading
 
   function effect (): () => void {
-    const interval = setInterval(tick, 100)
+    function set (reading: Reading): Reading {
+      const next = NextReading({ reading, field })
+
+      return next
+    }
+
+    function tick (): void {
+      setReading(set)
+    }
+
+    function highlight (definition: Definition): number {
+      const empty = definition === null
+      if (empty) return 0
+
+      const notDefined = definition === undefined
+      if (notDefined) return 500
+
+      return 1000
+    }
+    const delay = highlight(definition)
+
+    const interval = setInterval(tick, delay)
 
     function clear (): void {
       return clearInterval(interval)
@@ -23,7 +47,7 @@ export default function useReader (): Reading {
     return clear
   }
 
-  useEffect(effect, [])
+  useEffect(effect, [field, definition])
 
-  return reader
+  return reading
 }

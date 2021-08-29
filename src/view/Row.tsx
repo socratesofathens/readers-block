@@ -5,7 +5,7 @@ export default function Row (
 ): JSX.Element {
   const blocks = row.map((letter, index) => (
     <Block
-      key={index} letter={letter} rowIndex={rowIndex} columnIndex={index}
+      key={index} rowIndex={rowIndex} columnIndex={index}
     />
   ))
 
