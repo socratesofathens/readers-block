@@ -1,18 +1,20 @@
 import styled from 'styled-components'
+import interpret from '../lib/define/interpret'
 
-import { Definition } from '../types'
+import { Reading } from '../types'
 
 interface CellProps {
   readonly isReading: boolean
-  readonly definition: Definition
-  readonly title: Definition
+  readonly reading: Reading
 }
 
-function cellBackground ({ isReading, definition }: CellProps): string {
+function cellBackground ({ isReading, reading }: CellProps): string {
   if (isReading) {
-    if (definition == null) return 'blue'
+    const color = interpret({
+      definition: reading.definition, is: 'green', not: 'red', empty: 'blue'
+    })
 
-    return 'green'
+    return color
   }
 
   return 'lightgray'

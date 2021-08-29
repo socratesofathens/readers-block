@@ -1,9 +1,9 @@
 import { useContext } from 'react'
 
 import fieldContext from '../context/field'
-import readingContext from '../context/reading'
+import readContext from '../context/read'
 
-import Square from '../view/Square'
+import BlockView from '../view/Block'
 
 export default function Block (
   { rowIndex, columnIndex }: {
@@ -12,7 +12,7 @@ export default function Block (
   }
 ): JSX.Element {
   const field = useContext(fieldContext)
-  const reading = useContext(readingContext)
+  const { reading } = useContext(readContext)
 
   const readingRow = reading.row === rowIndex
   const readingColumn = readingRow && reading.start <= columnIndex
@@ -22,9 +22,9 @@ export default function Block (
   const letter = row[columnIndex]
 
   return (
-    <Square
+    <BlockView
       isReading={isReading}
-      definition={reading.definition}
+      reading={reading}
       letter={letter}
     />
   )

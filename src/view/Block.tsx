@@ -1,18 +1,18 @@
 import Cell from '../styles/Cell'
 
-import { Definition } from '../types'
+import { Reading } from '../types'
 
-export default function Square (
-  { letter, isReading, definition }: {
+export default function Block (
+  { letter, isReading, reading }: {
     letter: string
     isReading: boolean
-    definition: Definition
+    reading: Reading
   }
 ): JSX.Element {
   return (
     <Cell
       isReading={isReading}
-      definition={definition}
+      reading={reading}
       title='x'
     >
       {letter}

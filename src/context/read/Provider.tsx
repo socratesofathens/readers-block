@@ -1,18 +1,18 @@
 import { ReactNode } from 'react'
 
-import useReading from '../../use/reading'
+import useRead from '../../use/read'
 
 import context from '.'
 
-export default function ReadingProvider (
+export default function ReadProvider (
   { children }: { children: ReactNode }
 ): JSX.Element {
   const { Provider } = context
 
-  const reading = useReading()
+  const read = useRead()
 
   return (
-    <Provider value={reading}>
+    <Provider value={read}>
       {children}
     </Provider>
   )

@@ -8,7 +8,7 @@ export default function NextReading (
 ): Reading {
   const moved = move({ reading })
 
-  moved.definition = define({ field, reading: moved })
+  const defined = define({ field, reading: moved })
 
-  return moved
+  return defined
 }
