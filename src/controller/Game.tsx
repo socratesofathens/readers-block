@@ -1,21 +1,15 @@
-import ReaderProvider from '../context/reader/Provider'
+import ReadingProvider from '../context/reading/Provider'
 
-import { FIELD_WIDTH, FIELD_HEIGHT } from '../lib/field'
+import useGame from '../use/game'
 
 import FieldView from '../view/Field'
 
 export default function Game (): JSX.Element {
-  function Row (): string[] {
-    const cells = Array.from({ length: FIELD_WIDTH }, () => '')
-
-    return cells
-  }
-
-  const field = Array.from({ length: FIELD_HEIGHT }, Row)
+  const { field } = useGame()
 
   return (
-    <ReaderProvider>
+    <ReadingProvider>
       <FieldView field={field} />
-    </ReaderProvider>
+    </ReadingProvider>
   )
 }

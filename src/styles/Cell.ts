@@ -1,11 +1,11 @@
 import styled from 'styled-components'
 
 interface CellProps {
-  readonly reading: boolean
+  readonly isReading: boolean
 }
 
-function cellBackground ({ reading }: CellProps): string {
-  if (reading) return 'blue'
+function cellBackground ({ isReading }: CellProps): string {
+  if (isReading) return 'blue'
 
   return 'lightgray'
 }

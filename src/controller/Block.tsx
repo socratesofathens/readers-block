@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 
-import readerContext from '../context/reader'
+import readingContext from '../context/reading'
 
 import Cell from '../styles/Cell'
 
@@ -11,14 +11,14 @@ export default function Block (
     columnIndex: number
   }
 ): JSX.Element {
-  const reader = useContext(readerContext)
+  const reading = useContext(readingContext)
 
-  const row = reader.row === rowIndex
-  const start = row && reader.start <= columnIndex
-  const reading = start && reader.end >= columnIndex
+  const row = reading.row === rowIndex
+  const start = row && reading.start <= columnIndex
+  const isReading = start && reading.end >= columnIndex
 
   return (
-    <Cell reading={reading}>
+    <Cell isReading={isReading}>
       {letter}
     </Cell>
   )
