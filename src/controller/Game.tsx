@@ -1,9 +1,8 @@
 import ReaderProvider from '../context/reader/Provider'
 
-import FieldView from '../view/Field'
+import { FIELD_WIDTH, FIELD_HEIGHT } from '../lib/field'
 
-export const FIELD_WIDTH = 13
-export const FIELD_HEIGHT = 20
+import FieldView from '../view/Field'
 
 export default function Game (): JSX.Element {
   function Row (): string[] {
