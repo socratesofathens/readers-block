@@ -2,7 +2,7 @@ const ALPHABET = 'abcdefghijklmnopqrstuvwxyz'
 
 export default function Letter (): string {
   const emptyRandom = Math.random()
-  const empty = emptyRandom > 0.5
+  const empty = emptyRandom > 0.1
   if (empty) return ''
 
   const indexRandom = Math.random()

@@ -8,61 +8,96 @@ function isOver (position: number): boolean {
   return position >= FIELD_SIZE.width
 }
 
+interface Safety {
+  safe: number
+  isSafe: boolean
+  natural: boolean
+}
+
+function findSafe ({ row, start }: { row: string[], start: number }): Safety {
+  const sliced = row.slice(start)
+  const index = sliced.findIndex((letter, index) => {
+    if (letter === '') return false
+
+    return true
+  })
+
+  const safe = index === -1
+    ? index
+    : index + start
+
+  const isSafe = safe != null
+  const natural = isSafe && safe >= 0
+
+  return {
+    safe,
+    isSafe,
+    natural
+  }
+}
+
 export default function move (
   { field, reading }: { field: Field, reading: Reading }
 ): Reading {
-  function findSafe (row: string[]): number {
-    const safe = row.findIndex((letter, index) => {
-      if (index <= reading.start) return false
+  function findRow (row: number): number {
+    const next = row + 1
+    const done = next >= FIELD_SIZE.height
 
-      if (letter === '') return false
+    if (done) return findRow(-1)
 
-      return true
+    const nextRows = field.rows.slice(next)
+    const naturalIndex = nextRows.findIndex((row) => {
+      const { natural } = findSafe({ row, start: 0 })
+
+      return natural
     })
+    if (naturalIndex === -1) {
+      return findRow(-1)
+    }
+    const naturalRow = naturalIndex + next
 
-    return safe
+    return naturalRow
   }
 
   const row = field.rows[reading.row]
   const letters = row.slice(reading.start, reading.end + 1)
 
-  const nextRow = reading.row + 1
-  const nextRowReading = { ...READING, row: nextRow }
+  const nextRowIndex = findRow(reading.row)
+  const nextRow = field.rows[nextRowIndex]
+  const { safe } = findSafe({ row: nextRow, start: 0 })
+  const nextRowReading = {
+    ...READING, start: safe, end: safe, row: nextRowIndex
+  }
+
+  const nextStart = reading.start + 1
 
   const empty = letters.includes('')
   if (empty) {
     const understanding = { empty }
 
-    const safeStart = findSafe(row)
+    const { safe, natural } = findSafe({ row, start: nextStart })
 
-    if (safeStart != null && safeStart > -1) {
-      return {
-        ...reading,
-        start: safeStart,
-        end: safeStart,
-        understanding
-      }
+    if (!natural) {
+      return nextRowReading
     }
 
-    return nextRowReading
+    const safeReading = {
+      ...reading,
+      start: safe,
+      end: safe,
+      understanding
+    }
+
+    return safeReading
   }
 
   const nextEnd = reading.end + 1
   const endOver = nextEnd >= FIELD_SIZE.width
 
   if (endOver) {
-    const nextStart = reading.start + 1
     const startOver = isOver(nextStart)
 
     if (startOver) {
-      const done = nextRow >= FIELD_SIZE.height
-
-      if (done) {
-        return READING
-      }
-
-      const nextRowReading = { ...READING, row: nextRow }
-
       return nextRowReading
     }
 

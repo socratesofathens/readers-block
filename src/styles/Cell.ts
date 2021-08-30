@@ -10,22 +10,39 @@ interface CellProps {
 
 function cellBackground ({ isReading, reading }: CellProps): string {
   if (isReading) {
-    const color = interpret({
+    const background = interpret({
       understanding: reading.understanding,
       is: 'green',
       not: 'red',
-      empty: 'blue',
+      empty: 'lightgray',
       read: 'yellow'
+    })
+
+    return background
+  }
+
+  return 'white'
+}
+
+function cellColor ({ isReading, reading }: CellProps): string {
+  if (isReading) {
+    const color = interpret({
+      understanding: reading.understanding,
+      is: 'white',
+      not: 'black',
+      empty: 'black',
+      read: 'black'
     })
 
     return color
   }
 
-  return 'lightgray'
+  return 'black'
 }
 
 export default styled.div<CellProps>`
   background: ${cellBackground};
+  color: ${cellColor};
   border: 1px solid black;
   display: flex;
   align-items: center;
