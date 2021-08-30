@@ -9,23 +9,33 @@ import NewReading from '../lib/reading/new'
 
 import { Reading, Read } from '../types'
 
+function addReading (
+  { reading, readings }: { reading: Reading, readings: Reading[] }
+): Reading[] {
+  if (reading.understanding?.definition != null) {
+    const newReadings = [...readings, reading]
+
+    return newReadings
+  }
+
+  return readings
+}
+
 export default function useRead (): Read {
   const field = useContext(fieldContext)
 
   const newReading = NewReading({ field })
+  const initialReadings = addReading({ reading: newReading, readings: [] })
 
   const [reading, setReading] = useState<Reading>(newReading)
-  const [readings, setReadings] = useState<Reading[]>([])
+  const [readings, setReadings] = useState<Reading[]>(initialReadings)
 
   function effect (): () => void {
     function set (reading: Reading): Reading {
       const next = NextReading({ field, reading, readings })
 
-      if (next.understanding?.definition != null) {
-        const newReadings = [...readings, next]
-
-        setReadings(newReadings)
-      }
+      const newReadings = addReading({ reading: next, readings })
+      setReadings(newReadings)
 
       return next
     }
