@@ -2,7 +2,7 @@ import { useContext } from 'react'
 
 import fieldContext from '../context/field'
 
-import ReadingProvider from '../context/read/Provider'
+import ReadProvider from '../context/read/Provider'
 
 import GameStyle from '../styles/Game'
 
@@ -14,12 +14,12 @@ export default function Game (): JSX.Element {
   const { rows } = useContext(fieldContext)
 
   return (
-    <ReadingProvider>
+    <ReadProvider>
       <GameStyle>
         <FieldView rows={rows} />
 
         <List />
       </GameStyle>
-    </ReadingProvider>
+    </ReadProvider>
   )
 }

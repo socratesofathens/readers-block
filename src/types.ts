@@ -1,11 +1,17 @@
 export type Definition = string | undefined | null
 
+export interface Understanding {
+  word?: string
+  definition?: Definition
+  empty?: boolean
+  read?: boolean
+}
+
 export interface Reading {
   row: number
   start: number
   end: number
-  word?: string
-  definition?: Definition
+  understanding?: Understanding
 }
 
 export interface Read {

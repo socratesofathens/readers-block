@@ -5,9 +5,9 @@ import { Reading, Field } from '../../types'
 import define from '../define'
 
 export default function NewReading ({ field }: { field: Field }): Reading {
-  const { word, definition } = define({ reading: READING, field })
+  const { understanding } = define({ reading: READING, field, readings: [] })
 
-  const reading = { ...READING, word, definition }
+  const reading = { ...READING, understanding }
 
   return reading
 }

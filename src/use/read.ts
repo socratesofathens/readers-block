@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from 'react'
 
 import fieldContext from '../context/field'
 
-import interpret from '../lib/define/interpret'
+import interpret from '../lib/interpret'
 
 import NextReading from '../lib/reading/next'
 import NewReading from '../lib/reading/new'
@@ -17,13 +17,11 @@ export default function useRead (): Read {
   const [reading, setReading] = useState<Reading>(newReading)
   const [readings, setReadings] = useState<Reading[]>([])
 
-  const { definition } = reading
-
   function effect (): () => void {
     function set (reading: Reading): Reading {
-      const next = NextReading({ reading, field })
+      const next = NextReading({ field, reading, readings })
 
-      if (next.definition != null) {
+      if (next.understanding?.definition != null) {
         const newReadings = [...readings, next]
 
         setReadings(newReadings)
@@ -36,7 +34,13 @@ export default function useRead (): Read {
       setReading(set)
     }
 
-    const delay = interpret({ definition, is: 1000, not: 500, empty: 0 })
+    const delay = interpret({
+      understanding: reading.understanding,
+      is: 1000,
+      not: 500,
+      empty: 0,
+      read: 750
+    })
 
     const interval = setInterval(tick, delay)
 
@@ -47,7 +51,7 @@ export default function useRead (): Read {
     return clear
   }
 
-  useEffect(effect, [field, definition, readings])
+  useEffect(effect, [field, reading.understanding, readings])
 
   return { reading, readings }
 }

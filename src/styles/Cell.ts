@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import interpret from '../lib/define/interpret'
+import interpret from '../lib/interpret'
 
 import { Reading } from '../types'
 
@@ -11,7 +11,11 @@ interface CellProps {
 function cellBackground ({ isReading, reading }: CellProps): string {
   if (isReading) {
     const color = interpret({
-      definition: reading.definition, is: 'green', not: 'red', empty: 'blue'
+      understanding: reading.understanding,
+      is: 'green',
+      not: 'red',
+      empty: 'blue',
+      read: 'yellow'
     })
 
     return color

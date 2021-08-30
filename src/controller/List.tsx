@@ -9,11 +9,11 @@ export default function List (): JSX.Element {
   const { readings } = useContext(readContext)
 
   const items = readings.map((reading, index) => {
-    const title = reading.definition != null ? reading.definition : ''
+    const title = reading.understanding?.definition != null ? reading.understanding.definition : ''
 
     const item = (
       <ItemStyle key={index} title={title}>
-        {reading.word}
+        {reading.understanding?.word}
       </ItemStyle>
     )
 
