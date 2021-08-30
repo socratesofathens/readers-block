@@ -1,8 +1,6 @@
-export type Definition = string | undefined | null
-
 export interface Understanding {
   word?: string
-  definition?: Definition
+  definition?: string
   empty?: boolean
   read?: boolean
 }

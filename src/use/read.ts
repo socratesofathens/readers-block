@@ -37,7 +37,7 @@ export default function useRead (): Read {
     const delay = interpret({
       understanding: reading.understanding,
       is: 1000,
-      not: 500,
+      not: 100,
       empty: 0,
       read: 750
     })

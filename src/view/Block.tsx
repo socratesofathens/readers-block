@@ -9,11 +9,15 @@ export default function Block (
     reading: Reading
   }
 ): JSX.Element {
+  const title = isReading
+    ? reading.understanding?.definition
+    : undefined
+
   return (
     <Cell
       isReading={isReading}
       reading={reading}
-      title='x'
+      title={title}
     >
       {letter}
     </Cell>
