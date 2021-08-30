@@ -10,7 +10,7 @@ export default function NextReading (
     readings: Reading[]
   }
 ): Reading {
-  const moved = move({ reading })
+  const moved = move({ field, reading })
 
   const defined = define({ field, reading: moved, readings })
 

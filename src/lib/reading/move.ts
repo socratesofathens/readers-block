@@ -1,4 +1,4 @@
-import { Reading } from '../../types'
+import { Field, Reading } from '../../types'
 
 import FIELD_SIZE from '../field/size'
 
@@ -9,8 +9,44 @@ function isOver (position: number): boolean {
 }
 
 export default function move (
-  { reading }: { reading: Reading }
+  { field, reading }: { field: Field, reading: Reading }
 ): Reading {
+  function findSafe (row: string[]): number {
+    const safe = row.findIndex((letter, index) => {
+      if (index <= reading.start) return false
+
+      if (letter === '') return false
+
+      return true
+    })
+
+    return safe
+  }
+
+  const row = field.rows[reading.row]
+  const letters = row.slice(reading.start, reading.end + 1)
+
+  const nextRow = reading.row + 1
+  const nextRowReading = { ...READING, row: nextRow }
+
+  const empty = letters.includes('')
+  if (empty) {
+    const understanding = { empty }
+
+    const safeStart = findSafe(row)
+
+    if (safeStart != null && safeStart > -1) {
+      return {
+        ...reading,
+        start: safeStart,
+        end: safeStart,
+        understanding
+      }
+    }
+
+    return nextRowReading
+  }
+
   const nextEnd = reading.end + 1
   const endOver = nextEnd >= FIELD_SIZE.width
 
@@ -19,8 +55,6 @@ export default function move (
     const startOver = isOver(nextStart)
 
     if (startOver) {
-      const nextRow = reading.row + 1
-
       const done = nextRow >= FIELD_SIZE.height
 
       if (done) {

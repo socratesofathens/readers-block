@@ -48,7 +48,7 @@ export default function useRead (): Read {
       understanding: reading.understanding,
       is: 1000,
       not: 100,
-      empty: 0,
+      empty: 250,
       read: 750
     })
 
