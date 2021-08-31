@@ -16,13 +16,15 @@ interface Safety {
 
 function findSafe ({ row, start }: { row: string[], start: number }): Safety {
   const sliced = row.slice(start)
-  const index = sliced.findIndex((letter, index) => {
+  const index = sliced.findIndex((letter) => {
     if (letter === '') return false
 
     return true
   })
 
-  const safe = index === -1
+  const unnatural = index === -1
+
+  const safe = unnatural
     ? index
     : index + start
 
@@ -36,27 +38,73 @@ function findSafe ({ row, start }: { row: string[], start: number }): Safety {
   }
 }
 
+function findNext ({ rows, start, finder }: {
+  rows: any[]
+  start: number
+  finder: (element: any) => boolean
+}): number {
+  const sliced = rows.slice(start)
+  const found = sliced.findIndex(finder)
+  const next = found + start
+
+  return next
+}
+
+function isNatural (array: string[]): boolean {
+  const { natural } = findSafe({ row: array, start: 0 })
+
+  return natural
+}
+
+interface Nature {
+  found: number
+  natural: boolean
+}
+
+function findNatural ({ rows, start }: {
+  rows: any[]
+  start: number
+}): Nature {
+  const sliced = rows.slice(start)
+  console.log('sliced test:', sliced)
+  const index = sliced.findIndex(isNatural)
+  console.log('naturalIndex test:', index)
+  const natural = index > -1
+  if (!natural) {
+    return {
+      found: index,
+      natural
+    }
+  }
+
+  const found = index + start
+
+  return {
+    found,
+    natural
+  }
+}
+
 export default function move (
   { field, reading }: { field: Field, reading: Reading }
 ): Reading {
   function findRow (row: number): number {
     const next = row + 1
     const done = next >= FIELD_SIZE.height
+    const { found } = findNatural({ rows: field.rows, start: next })
+    console.log('naturalRow test:', found)
 
-    if (done) return findRow(-1)
+    const unnatural = found === -1
+    const unfound = done || unnatural
 
-    const nextRows = field.rows.slice(next)
-    const naturalIndex = nextRows.findIndex((row) => {
-      const { natural } = findSafe({ row, start: 0 })
+    if (unfound) {
+      const first = findRow(-1)
+      console.log('first test:', first)
 
-      return natural
-    })
-    if (naturalIndex === -1) {
-      return findRow(-1)
+      return first
     }
-    const naturalRow = naturalIndex + next
 
-    return naturalRow
+    return found
   }
 
   const row = field.rows[reading.row]

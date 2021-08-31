@@ -47,9 +47,9 @@ export default function useRead (): Read {
     const delay = interpret({
       understanding: reading.understanding,
       is: 1000,
-      not: 200,
-      empty: 150,
-      read: 500
+      not: 100,
+      empty: 0,
+      read: 10
     })
 
     const interval = setInterval(tick, delay)
