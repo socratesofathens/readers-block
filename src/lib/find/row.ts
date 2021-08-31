@@ -16,7 +16,7 @@ export default function findRow ({ field, row }: {
   const next = row + 1
   const done = next >= FIELD_SIZE.height
   const { found, natural } = after<Row>({
-    array: field.rows, start: next, finder: isNatural
+    array: field, start: next, finder: isNatural
   })
 
   const unfound = done || !natural

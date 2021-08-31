@@ -11,7 +11,7 @@ export default function move (
   { field, reading }: { field: Field, reading: Reading }
 ): Reading {
   const nextRowIndex = findRow({ field, row: reading.row })
-  const nextRow = field.rows[nextRowIndex]
+  const nextRow = field[nextRowIndex]
   const { found } = findLetter({ row: nextRow, start: 0 })
   const nextRowReading = {
     ...READING, start: found, end: found, row: nextRowIndex
@@ -19,7 +19,7 @@ export default function move (
 
   const nextStart = reading.start + 1
 
-  const row = field.rows[reading.row]
+  const row = field[reading.row]
   const letters = row.slice(reading.start, reading.end + 1)
   const empty = letters.includes('')
   if (empty) {

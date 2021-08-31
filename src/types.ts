@@ -19,9 +19,7 @@ export interface Read {
 
 export type Row = string[]
 
-export interface Field {
-  rows: Row[]
-}
+export type Field = Row[]
 
 export interface Found {
   found: number

@@ -17,7 +17,7 @@ export default function NewField (
     return cells
   }
 
-  const rows = Array.from({ length: FIELD_SIZE.height }, Row)
+  const field = Array.from({ length: FIELD_SIZE.height }, Row)
 
-  return { rows }
+  return field
 }

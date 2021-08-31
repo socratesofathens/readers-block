@@ -1,17 +1,16 @@
+import { Field, Row } from '../../types'
 import FIELD_SIZE from './size'
 
 function Empty (): string {
   return ''
 }
 
-function Row (): string[] {
+function EmptyRow (): Row {
   const cells = Array.from({ length: FIELD_SIZE.width }, Empty)
 
   return cells
 }
 
-const rows = Array.from({ length: FIELD_SIZE.height }, Row)
-
-const FIELD = { rows }
+const FIELD: Field = Array.from({ length: FIELD_SIZE.height }, EmptyRow)
 
 export default FIELD

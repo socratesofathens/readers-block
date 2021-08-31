@@ -9,7 +9,7 @@ export default function define (
     readings: Reading[]
   }
 ): Reading {
-  const row = field.rows[reading.row]
+  const row = field[reading.row]
   const letters = row.slice(reading.start, reading.end + 1)
 
   const empty = letters.includes('')

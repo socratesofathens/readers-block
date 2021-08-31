@@ -18,7 +18,7 @@ export default function Block (
   const readingColumn = readingRow && reading.start <= columnIndex
   const isReading = readingColumn && reading.end >= columnIndex
 
-  const row = field.rows[rowIndex]
+  const row = field[rowIndex]
   const letter = row[columnIndex]
 
   return (

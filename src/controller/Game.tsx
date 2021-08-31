@@ -11,12 +11,12 @@ import FieldView from '../view/Field'
 import List from './List'
 
 export default function Game (): JSX.Element {
-  const { rows } = useContext(fieldContext)
+  const field = useContext(fieldContext)
 
   return (
     <ReadProvider>
       <GameStyle>
-        <FieldView rows={rows} />
+        <FieldView field={field} />
 
         <List />
       </GameStyle>
