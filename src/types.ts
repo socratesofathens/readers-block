@@ -17,6 +17,14 @@ export interface Read {
   readings: Reading[]
 }
 
+export type Row = string[]
+
 export interface Field {
-  rows: string[][]
+  rows: Row[]
+}
+
+export interface Found {
+  found: number
+  natural: boolean
+  safe: boolean
 }
