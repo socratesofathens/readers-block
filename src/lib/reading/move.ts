@@ -8,34 +8,15 @@ function isOver (position: number): boolean {
   return position >= FIELD_SIZE.width
 }
 
-interface Safety {
-  safe: number
-  isSafe: boolean
-  natural: boolean
+function isNatural (array: string[]): boolean {
+  const { natural } = findSafe({ row: array, start: 0 })
+
+  return natural
 }
 
-function findSafe ({ row, start }: { row: string[], start: number }): Safety {
-  const sliced = row.slice(start)
-  const index = sliced.findIndex((letter) => {
-    if (letter === '') return false
-
-    return true
-  })
-
-  const unnatural = index === -1
-
-  const safe = unnatural
-    ? index
-    : index + start
-
-  const isSafe = safe != null
-  const natural = isSafe && safe >= 0
-
-  return {
-    safe,
-    isSafe,
-    natural
-  }
+interface Nature {
+  found: number
+  natural: boolean
 }
 
 function findNext ({ rows, start, finder }: {
@@ -50,15 +31,30 @@ function findNext ({ rows, start, finder }: {
   return next
 }
 
-function isNatural (array: string[]): boolean {
-  const { natural } = findSafe({ row: array, start: 0 })
-
-  return natural
-}
-
-interface Nature {
+interface Safety {
   found: number
   natural: boolean
+  safe: boolean
+}
+
+function findSafe ({ row, start }: { row: string[], start: number }): Safety {
+  const sliced = row.slice(start)
+  const index = sliced.findIndex((letter) => letter !== '')
+
+  const natural = index > -1
+
+  const found = natural
+    ? index + start
+    : index
+
+  const unsafe = found == null
+  const safe = !unsafe && natural
+
+  return {
+    found,
+    natural,
+    safe
+  }
 }
 
 function findNatural ({ rows, start }: {
@@ -66,18 +62,13 @@ function findNatural ({ rows, start }: {
   start: number
 }): Nature {
   const sliced = rows.slice(start)
-  console.log('sliced test:', sliced)
   const index = sliced.findIndex(isNatural)
-  console.log('naturalIndex test:', index)
-  const natural = index > -1
-  if (!natural) {
-    return {
-      found: index,
-      natural
-    }
-  }
 
-  const found = index + start
+  const natural = index > -1
+
+  const found = natural
+    ? index + start
+    : index
 
   return {
     found,
@@ -112,9 +103,9 @@ export default function move (
 
   const nextRowIndex = findRow(reading.row)
   const nextRow = field.rows[nextRowIndex]
-  const { safe } = findSafe({ row: nextRow, start: 0 })
+  const { found } = findSafe({ row: nextRow, start: 0 })
   const nextRowReading = {
-    ...READING, start: safe, end: safe, row: nextRowIndex
+    ...READING, start: found, end: found, row: nextRowIndex
   }
 
   const nextStart = reading.start + 1
@@ -123,7 +114,7 @@ export default function move (
   if (empty) {
     const understanding = { empty }
 
-    const { safe, natural } = findSafe({ row, start: nextStart })
+    const { found, natural } = findSafe({ row, start: nextStart })
 
     if (!natural) {
       return nextRowReading
@@ -131,8 +122,8 @@ export default function move (
 
     const safeReading = {
       ...reading,
-      start: safe,
-      end: safe,
+      start: found,
+      end: found,
       understanding
     }
 
