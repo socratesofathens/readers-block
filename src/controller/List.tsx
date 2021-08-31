@@ -2,19 +2,16 @@ import { useContext } from 'react'
 
 import readContext from '../context/read'
 
-import ItemStyle from '../styles/Item'
-import ListStyle from '../styles/List'
+import ListStyle from '../style/List'
+
+import ItemView from '../view/Item'
 
 export default function List (): JSX.Element {
   const { readings } = useContext(readContext)
 
   const items = readings.map((reading, index) => {
-    const title = reading.understanding?.definition != null ? reading.understanding.definition : ''
-
     const item = (
-      <ItemStyle key={index} title={title}>
-        {reading.understanding?.word}
-      </ItemStyle>
+      <ItemView key={index} understanding={reading.understanding} />
     )
 
     return item

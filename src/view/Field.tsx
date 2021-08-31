@@ -1,4 +1,4 @@
-import Grid from '../styles/Grid'
+import Grid from '../style/Grid'
 
 import Row from '../view/Row'
 

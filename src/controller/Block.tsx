@@ -14,18 +14,12 @@ export default function Block (
   const field = useContext(fieldContext)
   const { reading } = useContext(readContext)
 
-  const readingRow = reading.row === rowIndex
-  const readingColumn = readingRow && reading.start <= columnIndex
-  const isReading = readingColumn && reading.end >= columnIndex
-
-  const row = field[rowIndex]
-  const letter = row[columnIndex]
-
   return (
     <BlockView
-      isReading={isReading}
+      field={field}
       reading={reading}
-      letter={letter}
+      rowIndex={rowIndex}
+      columnIndex={columnIndex}
     />
   )
 }

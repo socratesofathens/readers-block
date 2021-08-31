@@ -4,7 +4,7 @@ import fieldContext from '../context/field'
 
 import ReadProvider from '../context/read/Provider'
 
-import GameStyle from '../styles/Game'
+import GameStyle from '../style/Game'
 
 import FieldView from '../view/Field'
 

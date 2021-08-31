@@ -9,7 +9,7 @@ export interface Reading {
   row: number
   start: number
   end: number
-  understanding?: Understanding
+  understanding: Understanding
 }
 
 export interface Read {

@@ -1,14 +1,21 @@
-import Cell from '../styles/Cell'
+import Cell from '../style/Cell'
 
-import { Reading } from '../types'
+import { Field, Reading } from '../types'
 
 export default function Block (
-  { letter, isReading, reading }: {
-    letter: string
-    isReading: boolean
+  { field, reading, rowIndex, columnIndex }: {
+    field: Field
     reading: Reading
+    rowIndex: number
+    columnIndex: number
   }
 ): JSX.Element {
+  const readingRow = reading.row === rowIndex
+  const readingColumn = readingRow && reading.start <= columnIndex
+  const isReading = readingColumn && reading.end >= columnIndex
+
+  const row = field[rowIndex]
+  const letter = row[columnIndex]
   const title = isReading
     ? reading.understanding?.definition
     : undefined
