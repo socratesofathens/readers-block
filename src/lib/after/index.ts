@@ -1,10 +1,10 @@
-import { Found } from '../../types'
+import { Find } from '../../types'
 
 export default function after <T> ({ array, start, finder }: {
   array: T[]
   start: number
   finder: (element: T) => boolean
-}): Found {
+}): Find {
   const sliced = array.slice(start)
   const index = sliced.findIndex(finder)
 
@@ -14,8 +14,5 @@ export default function after <T> ({ array, start, finder }: {
     ? index + start
     : index
 
-  const unfound = found == null
-  const safe = !unfound && natural
-
-  return { found, natural, safe }
+  return { found, natural }
 }

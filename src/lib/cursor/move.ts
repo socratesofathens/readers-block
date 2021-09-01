@@ -1,7 +1,5 @@
 import { Board, Cursor } from '../../types'
 
-import BOARD_SIZE from '../board/size'
-
 import letterAfter from '../after/letter'
 import rowAfter from '../after/row'
 
@@ -10,51 +8,34 @@ import CURSOR from '.'
 export default function move (
   { board, cursor }: { board: Board, cursor: Cursor }
 ): Cursor {
-  const nextRowIndex = rowAfter({ board, row: cursor.row })
-  const nextRow = board[nextRowIndex]
-  const { found } = letterAfter({ row: nextRow, start: 0 })
-  const nextRowCursor = {
-    ...CURSOR, start: found, end: found, row: nextRowIndex
+  console.log('cursor test:', cursor)
+  const row = board[cursor.row]
+  const nextIndex = cursor.end + 1
+  const nextLetter = row[nextIndex]
+
+  const isFull = nextLetter !== ''
+  const isLetter = isFull && nextLetter != null
+
+  if (isLetter) {
+    const nextIndexCursor = { ...cursor, end: nextIndex }
+
+    return nextIndexCursor
   }
 
   const nextStart = cursor.start + 1
+  const { found, natural } = letterAfter({ row, start: nextStart })
 
-  const row = board[cursor.row]
-  const letters = row.slice(cursor.start, cursor.end + 1)
-  const empty = letters.includes('')
-  if (empty) {
-    const { found, natural } = letterAfter({ row: row, start: nextStart })
+  const unfound = found == null
+  const safe = !unfound && natural
 
-    if (!natural) {
-      return nextRowCursor
-    }
-
-    const safeCursor = {
-      ...cursor,
-      start: found,
-      end: found,
-      understanding: { empty }
-    }
-
-    return safeCursor
-  }
-
-  const nextEnd = cursor.end + 1
-  const endOver = nextEnd >= BOARD_SIZE.width
-
-  if (endOver) {
-    const startOver = nextStart >= BOARD_SIZE.width
-
-    if (startOver) {
-      return nextRowCursor
-    }
-
-    const nextStartCursor = { ...cursor, start: nextStart, end: nextStart }
+  if (safe) {
+    const nextStartCursor = { ...cursor, start: found, end: found }
 
     return nextStartCursor
   }
 
-  const nextEndCursor = { ...cursor, end: nextEnd }
+  const { row: x, match } = rowAfter({ board, row: cursor.row })
+  const nextRowCursor = { ...CURSOR, start: match, end: match, row: x }
 
-  return nextEndCursor
+  return nextRowCursor
 }

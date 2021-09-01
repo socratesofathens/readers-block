@@ -10,7 +10,7 @@ interface Creation <T> {
   useCreation: () => T
 }
 
-export default function create <T> ({ initial, useHook }: {
+export default function contextCreator <T> ({ initial, useHook }: {
   initial: T
   useHook: any
 }): Creation<T> {

@@ -1,4 +1,4 @@
-import { Found, Row } from '../../types'
+import { Find, Row } from '../../types'
 
 import after from '.'
 
@@ -11,7 +11,7 @@ function isLetter (element: string): boolean {
 export default function letterAfter ({ row, start }: {
   row: Row
   start: number
-}): Found {
+}): Find {
   const letter = after<string>({
     array: row, start, finder: isLetter
   })

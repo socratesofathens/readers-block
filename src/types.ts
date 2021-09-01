@@ -29,8 +29,7 @@ export interface Game {
   results: Results
 }
 
-export interface Found {
+export interface Find {
   found: number
   natural: boolean
-  safe: boolean
 }

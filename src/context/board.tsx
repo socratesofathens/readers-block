@@ -4,9 +4,9 @@ import { Board } from '../types'
 
 import useBoard from '../use/board'
 
-import create from '.'
+import contextCreator from '.'
 
-const creation = create<Board>({ initial: BOARD, useHook: useBoard })
+const creation = contextCreator<Board>({ initial: BOARD, useHook: useBoard })
 
 export const {
   Provider: BoardProvider, useCreation: useBoardContext
