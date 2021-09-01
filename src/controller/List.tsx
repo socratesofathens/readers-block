@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 
-import searchContext from '../context/search'
+import { searchContext } from '../context/search'
 
 import ListStyle from '../style/List'
 

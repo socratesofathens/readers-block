@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 
-import boardContext from '../context/board'
-import searchContext from '../context/search'
+import { boardContext } from '../context/board'
+import { searchContext } from '../context/search'
 
 import CellView from '../view/Cell'
 

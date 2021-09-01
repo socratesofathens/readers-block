@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from 'react'
 
-import boardContext from '../context/board'
+import { boardContext } from '../context/board'
 
 import interpret from '../lib/interpret'
 

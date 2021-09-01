@@ -17,7 +17,7 @@ export default function NewField (
     return cells
   }
 
-  const field = Array.from({ length: BOARD_SIZE.height }, Row)
+  const board = Array.from({ length: BOARD_SIZE.height }, Row)
 
-  return field
+  return board
 }
