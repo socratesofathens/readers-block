@@ -1,25 +1,25 @@
 import { useContext } from 'react'
 
-import fieldContext from '../context/field'
+import boardContext from '../context/board'
 
-import ReadProvider from '../context/read/Provider'
+import SearchProvider from '../context/search/Provider'
 
 import GameStyle from '../style/Game'
 
-import FieldView from '../view/Field'
+import BoardView from '../view/Board'
 
 import List from './List'
 
-export default function Game (): JSX.Element {
-  const field = useContext(fieldContext)
+export default function GameController (): JSX.Element {
+  const field = useContext(boardContext)
 
   return (
-    <ReadProvider>
+    <SearchProvider>
       <GameStyle>
-        <FieldView field={field} />
+        <BoardView board={field} />
 
         <List />
       </GameStyle>
-    </ReadProvider>
+    </SearchProvider>
   )
 }

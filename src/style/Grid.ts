@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import FIELD_SIZE from '../lib/field/size'
+import FIELD_SIZE from '../lib/board/size'
 
 export default styled.div`
   display: grid;

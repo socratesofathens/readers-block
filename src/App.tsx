@@ -1,6 +1,6 @@
-import FieldProvider from './context/field/Provider'
+import FieldProvider from './context/board/Provider'
 
-import Game from './controller/Game'
+import GameController from './controller/Game'
 
 import GlobalStyle from './style/global'
 
@@ -10,7 +10,7 @@ export default function App (): JSX.Element {
       <GlobalStyle />
 
       <FieldProvider>
-        <Game />
+        <GameController />
       </FieldProvider>
     </>
   )

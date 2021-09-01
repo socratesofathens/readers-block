@@ -8,7 +8,7 @@ function isLetter (element: string): boolean {
   return !empty
 }
 
-export default function letter ({ row, start }: {
+export default function letterAfter ({ row, start }: {
   row: Row
   start: number
 }): Found {

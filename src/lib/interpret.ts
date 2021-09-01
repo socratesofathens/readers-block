@@ -1,19 +1,19 @@
 import { Understanding } from '../types'
 
 export default function interpret (
-  { understanding, is, not, empty, read }: {
+  { understanding, is, not, already, empty }: {
     understanding?: Understanding
     is: any
     not: any
+    already: any
     empty: any
-    read: any
   }
 ): any {
   const isEmpty = understanding?.empty != null
   if (isEmpty) return empty
 
-  const isRead = understanding?.read != null && understanding?.read
-  if (isRead) return read
+  const isAlready = understanding?.already != null && understanding?.already
+  if (isAlready) return already
 
   const isNot = understanding?.definition == null
   if (isNot) return not

@@ -1,17 +1,17 @@
 import { useContext } from 'react'
 
-import readContext from '../context/read'
+import searchContext from '../context/search'
 
 import ListStyle from '../style/List'
 
 import ItemView from '../view/Item'
 
-export default function List (): JSX.Element {
-  const { readings } = useContext(readContext)
+export default function ListController (): JSX.Element {
+  const { results } = useContext(searchContext)
 
-  const items = readings.map((reading, index) => {
+  const items = results.map(({ understanding }) => {
     const item = (
-      <ItemView key={index} understanding={reading.understanding} />
+      <ItemView key={understanding.word} understanding={understanding} />
     )
 
     return item

@@ -1,6 +1,6 @@
 import { Found } from '../../types'
 
-export default function findAfter <T> ({ array, start, finder }: {
+export default function after <T> ({ array, start, finder }: {
   array: T[]
   start: number
   finder: (element: T) => boolean

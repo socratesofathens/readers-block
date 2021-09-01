@@ -1,18 +1,18 @@
 import { ReactNode } from 'react'
 
-import useField from '../../use/field'
+import useBoard from '../../use/board'
 
 import context from '.'
 
 export default function FieldProvider (
   { children }: { children: ReactNode }
 ): JSX.Element {
-  const field = useField()
+  const board = useBoard()
 
   const { Provider } = context
 
   return (
-    <Provider value={field}>
+    <Provider value={board}>
       {children}
     </Provider>
   )

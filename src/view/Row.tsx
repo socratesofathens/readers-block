@@ -1,4 +1,4 @@
-import Block from '../controller/Block'
+import Block from '../controller/Cell'
 
 export default function Row (
   { row, rowIndex }: { row: string[], rowIndex: number }

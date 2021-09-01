@@ -1,29 +1,33 @@
-import { Field, Reading } from '../../types'
+import { Board, Cursor, Results } from '../../types'
 
 import lookup from './lookup'
 
 export default function define (
-  { field, reading, readings }: {
-    field: Field
-    reading: Reading
-    readings: Reading[]
+  { board, cursor, results }: {
+    board: Board
+    cursor: Cursor
+    results: Results
   }
-): Reading {
-  const row = field[reading.row]
-  const letters = row.slice(reading.start, reading.end + 1)
+): Cursor {
+  const row = board[cursor.row]
+  const letters = row.slice(cursor.start, cursor.end + 1)
 
   const empty = letters.includes('')
   if (empty) {
-    return { ...reading, understanding: { empty: true } }
+    const emptyCursor = { ...cursor, understanding: { empty: true } }
+
+    return emptyCursor
   }
 
   const word = letters.join('')
 
-  const match = readings.find(reading => reading.understanding?.word === word)
-  if (match != null) {
-    const read = { word, read: true }
+  const match = results.find(result => result.understanding?.word === word)
+  const already = match != null
+  if (already) {
+    const understanding = { word, already: true }
+    const alreadyCursor = { ...cursor, understanding }
 
-    return { ...reading, understanding: read }
+    return alreadyCursor
   }
 
   const definition = lookup({ word })
@@ -33,5 +37,7 @@ export default function define (
     definition
   }
 
-  return { ...reading, understanding: defined }
+  const definedCursor = { ...cursor, understanding: defined }
+
+  return definedCursor
 }

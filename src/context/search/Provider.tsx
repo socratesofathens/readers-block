@@ -1,18 +1,18 @@
 import { ReactNode } from 'react'
 
-import useRead from '../../use/read'
+import useSearch from '../../use/search'
 
 import context from '.'
 
-export default function ReadProvider (
+export default function SearchProvider (
   { children }: { children: ReactNode }
 ): JSX.Element {
   const { Provider } = context
 
-  const read = useRead()
+  const search = useSearch()
 
   return (
-    <Provider value={read}>
+    <Provider value={search}>
       {children}
     </Provider>
   )

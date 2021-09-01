@@ -1,21 +1,21 @@
 import styled from 'styled-components'
 import interpret from '../lib/interpret'
 
-import { Reading } from '../types'
+import { Cursor } from '../types'
 
 interface CellProps {
-  readonly isReading: boolean
-  readonly reading: Reading
+  searching: boolean
+  cursor: Cursor
 }
 
-function cellBackground ({ isReading, reading }: CellProps): string {
-  if (isReading) {
+function cellBackground ({ searching, cursor }: CellProps): string {
+  if (searching) {
     const background = interpret({
-      understanding: reading.understanding,
+      understanding: cursor.understanding,
       is: 'green',
       not: 'red',
       empty: 'lightgray',
-      read: 'yellow'
+      already: 'yellow'
     })
 
     return background
@@ -24,14 +24,14 @@ function cellBackground ({ isReading, reading }: CellProps): string {
   return 'white'
 }
 
-function cellColor ({ isReading, reading }: CellProps): string {
-  if (isReading) {
+function cellColor ({ searching, cursor }: CellProps): string {
+  if (searching) {
     const color = interpret({
-      understanding: reading.understanding,
+      understanding: cursor.understanding,
       is: 'white',
       not: 'black',
       empty: 'black',
-      read: 'black'
+      already: 'black'
     })
 
     return color
