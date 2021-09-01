@@ -23,6 +23,12 @@ export type Row = string[]
 
 export type Board = Row[]
 
+export interface Game {
+  board: Board
+  cursor: Cursor
+  results: Results
+}
+
 export interface Found {
   found: number
   natural: boolean

@@ -1,14 +1,10 @@
-import { Cursor, Board, Results } from '../../types'
+import { Cursor, Game } from '../../types'
 
-import define from '../define'
+import define from './define'
 import move from './move'
 
 export default function Next (
-  { board, cursor, results }: {
-    board: Board
-    cursor: Cursor
-    results: Results
-  }
+  { board, cursor, results }: Game
 ): Cursor {
   const moved = move({ board, cursor })
 

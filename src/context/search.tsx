@@ -9,5 +9,5 @@ import create from '.'
 const creation = create<Search>({ initial: SEARCH, useHook: useSearch })
 
 export const {
-  context: searchContext, Provider: SearchProvider
+  Provider: SearchProvider, useCreation: useSearchContext
 } = creation

@@ -1,4 +1,4 @@
-import { createContext, ReactNode, Context } from 'react'
+import { createContext, ReactNode, Context, useContext } from 'react'
 
 interface Bearer { children: ReactNode }
 
@@ -7,6 +7,7 @@ type ProviderProvider = (bearer: Bearer) => JSX.Element
 interface Creation <T> {
   context: Context<T>
   Provider: ProviderProvider
+  useCreation: () => T
 }
 
 export default function create <T> ({ initial, useHook }: {
@@ -27,7 +28,11 @@ export default function create <T> ({ initial, useHook }: {
     return provider
   }
 
-  const contextContext = { context, Provider }
+  function useCreation (): T {
+    return useContext(context)
+  }
+
+  const contextContext = { context, Provider, useCreation }
 
   return contextContext
 }

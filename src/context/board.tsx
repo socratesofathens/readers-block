@@ -9,5 +9,5 @@ import create from '.'
 const creation = create<Board>({ initial: BOARD, useHook: useBoard })
 
 export const {
-  context: boardContext, Provider: BoardProvider
+  Provider: BoardProvider, useCreation: useBoardContext
 } = creation

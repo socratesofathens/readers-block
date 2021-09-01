@@ -1,7 +1,5 @@
-import { useContext } from 'react'
-
-import { boardContext } from '../context/board'
-import { searchContext } from '../context/search'
+import { useBoardContext } from '../context/board'
+import { useSearchContext } from '../context/search'
 
 import CellView from '../view/Cell'
 
@@ -11,8 +9,8 @@ export default function CellController (
     columnIndex: number
   }
 ): JSX.Element {
-  const board = useContext(boardContext)
-  const { cursor } = useContext(searchContext)
+  const board = useBoardContext()
+  const { cursor } = useSearchContext()
 
   return (
     <CellView

@@ -1,13 +1,11 @@
-import { useContext } from 'react'
-
-import { searchContext } from '../context/search'
+import { useSearchContext } from '../context/search'
 
 import ListStyle from '../style/List'
 
 import ItemView from '../view/Item'
 
 export default function ListController (): JSX.Element {
-  const { results } = useContext(searchContext)
+  const { results } = useSearchContext()
 
   const items = results.map(({ understanding }) => {
     const item = (

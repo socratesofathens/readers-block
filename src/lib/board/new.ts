@@ -4,10 +4,10 @@ import Letter from '../Letter'
 
 import BOARD_SIZE from './size'
 
-export default function NewField (
-  options?: { writer?: () => string }
+export default function NewBoard (
+  options?: { writer: () => string }
 ): Board {
-  const callback = options == null || options.writer == null
+  const callback = options == null
     ? Letter
     : options.writer
 

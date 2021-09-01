@@ -1,13 +1,9 @@
-import { Board, Cursor, Results } from '../../types'
+import { Cursor, Game } from '../../types'
 
-import lookup from './lookup'
+import lookup from '../lookup'
 
 export default function define (
-  { board, cursor, results }: {
-    board: Board
-    cursor: Cursor
-    results: Results
-  }
+  { board, cursor, results }: Game
 ): Cursor {
   const row = board[cursor.row]
   const letters = row.slice(cursor.start, cursor.end + 1)

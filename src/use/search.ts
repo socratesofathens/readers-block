@@ -1,6 +1,6 @@
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect } from 'react'
 
-import { boardContext } from '../context/board'
+import { useBoardContext } from '../context/board'
 
 import interpret from '../lib/interpret'
 
@@ -22,7 +22,7 @@ function addResult (
 }
 
 export default function useSearch (): Search {
-  const board = useContext(boardContext)
+  const board = useBoardContext()
 
   const newCursor = NewCursor({ board })
   const initialResults = addResult({ cursor: newCursor, results: [] })
