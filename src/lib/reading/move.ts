@@ -2,17 +2,17 @@ import { Field, Reading } from '../../types'
 
 import FIELD_SIZE from '../field/size'
 
-import findLetter from '../find/letter'
-import findRow from '../find/row'
+import letterAfter from '../after/letter'
+import rowAfter from '../after/row'
 
 import READING from '.'
 
 export default function move (
   { field, reading }: { field: Field, reading: Reading }
 ): Reading {
-  const nextRowIndex = findRow({ field, row: reading.row })
+  const nextRowIndex = rowAfter({ field, row: reading.row })
   const nextRow = field[nextRowIndex]
-  const { found } = findLetter({ row: nextRow, start: 0 })
+  const { found } = letterAfter({ row: nextRow, start: 0 })
   const nextRowReading = {
     ...READING, start: found, end: found, row: nextRowIndex
   }
@@ -23,7 +23,7 @@ export default function move (
   const letters = row.slice(reading.start, reading.end + 1)
   const empty = letters.includes('')
   if (empty) {
-    const { found, natural } = findLetter({ row: row, start: nextStart })
+    const { found, natural } = letterAfter({ row: row, start: nextStart })
 
     if (!natural) {
       return nextRowReading

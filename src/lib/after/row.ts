@@ -1,7 +1,9 @@
 import { Field, Row } from '../../types'
+
 import FIELD_SIZE from '../field/size'
-import after from './after'
+
 import letter from './letter'
+import after from '.'
 
 function isNatural (row: Row): boolean {
   const { natural } = letter({ row, start: 0 })

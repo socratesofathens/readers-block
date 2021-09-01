@@ -1,6 +1,6 @@
 import { Found, Row } from '../../types'
 
-import after from './after'
+import after from '.'
 
 function isLetter (element: string): boolean {
   const empty = element === ''
