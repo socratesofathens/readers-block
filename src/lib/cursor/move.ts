@@ -5,20 +5,31 @@ import rowAfter from '../after/row'
 
 import CURSOR from '.'
 
+function isSafe (letter: string): boolean {
+  const full = letter !== ''
+  const safe = full && letter != null
+
+  return safe
+}
+
 export default function moveCursor (
   { board, cursor }: { board: Board, cursor: Cursor }
 ): Cursor {
   const row = board[cursor.row]
-  const nextIndex = cursor.end + 1
-  const nextLetter = row[nextIndex]
 
-  const isFull = nextLetter !== ''
-  const isLetter = isFull && nextLetter != null
+  const startLetter = row[cursor.start]
+  const startSafe = isSafe(startLetter)
 
-  if (isLetter) {
-    const nextIndexCursor = { ...cursor, end: nextIndex }
+  const nextEnd = cursor.end + 1
+  const nextEndLetter = row[nextEnd]
+  const nextEndSafe = isSafe(nextEndLetter)
 
-    return nextIndexCursor
+  const nextSafe = startSafe && nextEndSafe
+
+  if (nextSafe) {
+    const nextEndCursor = { ...cursor, end: nextEnd }
+
+    return nextEndCursor
   }
 
   const nextStart = cursor.start + 1

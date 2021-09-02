@@ -7,7 +7,8 @@ import move from './move'
 
 export default function NewCursor ({ board }: { board: Board }): Cursor {
   const first = board[0][0]
-  const moved = first === ''
+  const isEmpty = first === ''
+  const moved = isEmpty
     ? move({ board, cursor: CURSOR })
     : CURSOR
 

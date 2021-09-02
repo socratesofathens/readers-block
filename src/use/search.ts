@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-import { useBoardContext } from '../context/board'
+import { useGameContext } from '../context/game'
 
 import interpret from '../lib/interpret'
 
@@ -22,9 +22,9 @@ function addResult (
 }
 
 export default function useSearch (): Search {
-  const board = useBoardContext()
+  const game = useGameContext()
 
-  const newCursor = NewCursor({ board })
+  const newCursor = NewCursor(game)
   const initialResults = addResult({ cursor: newCursor, results: [] })
 
   const [cursor, setCursor] = useState<Cursor>(newCursor)
@@ -32,12 +32,28 @@ export default function useSearch (): Search {
 
   function effect (): () => void {
     function set (cursor: Cursor): Cursor {
-      const next = NextCursor({ board, cursor, results })
+      const defined = cursor.understanding.definition != null
+      if (defined) {
+        const { row, start, end } = cursor
 
-      const newResults = addResult({ cursor: next, results })
+        const newBoard = [...game.board]
+        const array = newBoard[row]
+
+        const difference = end - start
+        const length = { length: difference }
+        const range = Array.from(length, (_, index) => index + start)
+
+        range.forEach(index => array[index] === '')
+
+        game.setBoard(newBoard)
+      }
+
+      const nextCursor = NextCursor({ board: game.board, cursor, results })
+
+      const newResults = addResult({ cursor: nextCursor, results })
       setResults(newResults)
 
-      return next
+      return nextCursor
     }
 
     function tick (): void {
@@ -48,7 +64,7 @@ export default function useSearch (): Search {
       understanding: cursor.understanding,
       is: 0,
       not: 0,
-      empty: 10000,
+      empty: 100000,
       already: 0
     })
 
@@ -61,7 +77,7 @@ export default function useSearch (): Search {
     return clear
   }
 
-  useEffect(effect, [board, cursor.understanding, results])
+  useEffect(effect, [game, cursor.understanding, results])
 
   return { cursor, results }
 }

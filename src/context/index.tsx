@@ -10,14 +10,14 @@ interface Creation <T> {
   useCreation: () => T
 }
 
-export default function contextCreator <T> ({ initial, useHook }: {
+export default function contextCreator <T> ({ initial, useValue }: {
   initial: T
-  useHook: any
+  useValue: any
 }): Creation<T> {
   const context: Context<T> = createContext(initial)
 
   const Provider: ProviderProvider = function Provider ({ children }) {
-    const value = useHook()
+    const value = useValue()
 
     const provider = (
       <context.Provider value={value}>

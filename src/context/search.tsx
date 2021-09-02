@@ -6,7 +6,9 @@ import useSearch from '../use/search'
 
 import contextCreator from '.'
 
-const creation = contextCreator<Search>({ initial: SEARCH, useHook: useSearch })
+const creation = contextCreator<Search>({
+  initial: SEARCH, useValue: useSearch
+})
 
 export const {
   Provider: SearchProvider, useCreation: useSearchContext

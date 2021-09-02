@@ -1,4 +1,4 @@
-import { useBoardContext } from '../context/board'
+import { useGameContext } from '../context/game'
 import { useSearchContext } from '../context/search'
 
 import CellView from '../view/Cell'
@@ -9,7 +9,7 @@ export default function CellController (
     columnIndex: number
   }
 ): JSX.Element {
-  const board = useBoardContext()
+  const { board } = useGameContext()
   const { cursor } = useSearchContext()
 
   return (

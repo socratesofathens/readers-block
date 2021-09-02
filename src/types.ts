@@ -27,6 +27,7 @@ export interface Game {
   board: Board
   cursor: Cursor
   results: Results
+  setBoard?: any
 }
 
 export interface Find {

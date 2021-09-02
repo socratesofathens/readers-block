@@ -1,4 +1,4 @@
-import { useBoardContext } from '../context/board'
+import { useGameContext } from '../context/game'
 
 import { SearchProvider } from '../context/search'
 
@@ -9,7 +9,7 @@ import BoardView from '../view/Board'
 import List from './List'
 
 export default function GameController (): JSX.Element {
-  const board = useBoardContext()
+  const { board } = useGameContext()
 
   return (
     <SearchProvider>
