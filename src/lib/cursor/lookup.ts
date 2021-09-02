@@ -1,8 +1,8 @@
 import { Cursor, Game } from '../../types'
 
-import lookup from '../lookup'
+import define from '../define'
 
-export default function define (
+export default function lookupCursor (
   { board, cursor, results }: Game
 ): Cursor {
   const row = board[cursor.row]
@@ -26,7 +26,7 @@ export default function define (
     return alreadyCursor
   }
 
-  const definition = lookup({ word })
+  const definition = define({ word })
 
   const defined = {
     word,

@@ -5,10 +5,9 @@ import rowAfter from '../after/row'
 
 import CURSOR from '.'
 
-export default function move (
+export default function moveCursor (
   { board, cursor }: { board: Board, cursor: Cursor }
 ): Cursor {
-  console.log('cursor test:', cursor)
   const row = board[cursor.row]
   const nextIndex = cursor.end + 1
   const nextLetter = row[nextIndex]
@@ -25,8 +24,8 @@ export default function move (
   const nextStart = cursor.start + 1
   const { found, natural } = letterAfter({ row, start: nextStart })
 
-  const unfound = found == null
-  const safe = !unfound && natural
+  const isFound = found != null
+  const safe = isFound && natural
 
   if (safe) {
     const nextStartCursor = { ...cursor, start: found, end: found }
@@ -34,8 +33,8 @@ export default function move (
     return nextStartCursor
   }
 
-  const { row: x, match } = rowAfter({ board, row: cursor.row })
-  const nextRowCursor = { ...CURSOR, start: match, end: match, row: x }
+  const { x, y } = rowAfter({ board, row: cursor.row })
+  const nextRowCursor = { ...CURSOR, row: x, start: y, end: y }
 
   return nextRowCursor
 }

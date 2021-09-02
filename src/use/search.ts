@@ -46,10 +46,10 @@ export default function useSearch (): Search {
 
     const delay = interpret({
       understanding: cursor.understanding,
-      is: 500,
-      not: 500,
-      empty: 500,
-      already: 500
+      is: 0,
+      not: 0,
+      empty: 10000,
+      already: 0
     })
 
     const interval = setInterval(tick, delay)

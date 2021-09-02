@@ -6,8 +6,8 @@ import letter from './letter'
 import after from '.'
 
 interface Position {
-  row: number
-  match: number
+  x: number
+  y: number
 }
 
 export default function cellAfter ({ board, row }: {
@@ -41,5 +41,5 @@ export default function cellAfter ({ board, row }: {
     return first
   }
 
-  return { row: found, match: y }
+  return { x: found, y }
 }

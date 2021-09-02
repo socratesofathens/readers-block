@@ -1,6 +1,6 @@
 import { Cursor, Game } from '../../types'
 
-import define from './define'
+import lookup from './lookup'
 import move from './move'
 
 export default function Next (
@@ -8,7 +8,7 @@ export default function Next (
 ): Cursor {
   const moved = move({ board, cursor })
 
-  const defined = define({ board, cursor: moved, results })
+  const looked = lookup({ board, cursor: moved, results })
 
-  return defined
+  return looked
 }

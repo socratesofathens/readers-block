@@ -2,12 +2,16 @@ import CURSOR from '.'
 
 import { Cursor, Board } from '../../types'
 
-import define from './define'
+import lookup from './lookup'
+import move from './move'
 
-export default function New ({ board }: { board: Board }): Cursor {
-  const { understanding } = define({ cursor: CURSOR, board, results: [] })
+export default function NewCursor ({ board }: { board: Board }): Cursor {
+  const first = board[0][0]
+  const moved = first === ''
+    ? move({ board, cursor: CURSOR })
+    : CURSOR
 
-  const cursor = { ...CURSOR, understanding }
+  const looked = lookup({ cursor: moved, board, results: [] })
 
-  return cursor
+  return looked
 }
