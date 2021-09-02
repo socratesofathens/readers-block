@@ -7,7 +7,35 @@ import interpret from '../lib/interpret'
 import NextCursor from '../lib/cursor/next'
 import NewCursor from '../lib/cursor/new'
 
-import { Cursor, Results, Search } from '../types'
+import { Board, Cursor, Results, Search } from '../types'
+
+function remove ({ board, cursor }: {
+  board: Board
+  cursor: Cursor
+}): Board {
+  const defined = cursor.understanding.definition != null
+  if (defined) {
+    const newBoard = [...board]
+    const { row, start, end } = cursor
+    const oldRow = newBoard[row]
+    const newRow = [...oldRow]
+
+    const nextEnd = end + 1
+    const difference = nextEnd - start
+    const length = { length: difference }
+    const range = Array.from(length, (_, index) => index + start)
+    console.log('range test:', range)
+    range.forEach(index => {
+      newRow[index] = ''
+    })
+
+    newBoard[row] = newRow
+
+    return newBoard
+  }
+
+  return board
+}
 
 function addResult (
   { cursor, results }: Search
@@ -32,23 +60,15 @@ export default function useSearch (): Search {
 
   function effect (): () => void {
     function set (cursor: Cursor): Cursor {
+      const { definition } = cursor.understanding
+      console.log('definition test:', definition)
       const defined = cursor.understanding.definition != null
-      if (defined) {
-        const { row, start, end } = cursor
+      console.log('defined test:', defined)
+      const newBoard = remove({ board: game.board, cursor })
 
-        const newBoard = [...game.board]
-        const array = newBoard[row]
+      game.setBoard(newBoard)
 
-        const difference = end - start
-        const length = { length: difference }
-        const range = Array.from(length, (_, index) => index + start)
-
-        range.forEach(index => array[index] === '')
-
-        game.setBoard(newBoard)
-      }
-
-      const nextCursor = NextCursor({ board: game.board, cursor, results })
+      const nextCursor = NextCursor({ board: newBoard, cursor, results })
 
       const newResults = addResult({ cursor: nextCursor, results })
       setResults(newResults)
@@ -62,10 +82,10 @@ export default function useSearch (): Search {
 
     const delay = interpret({
       understanding: cursor.understanding,
-      is: 0,
-      not: 0,
+      is: 1000,
+      not: 100,
       empty: 100000,
-      already: 0
+      already: 10
     })
 
     const interval = setInterval(tick, delay)
