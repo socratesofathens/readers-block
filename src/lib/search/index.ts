@@ -1,6 +1,6 @@
-import { Search } from '../types'
+import { Search } from '../../types'
 
-import CURSOR from './cursor'
+import CURSOR from '../cursor'
 
 const SEARCH: Search = {
   cursor: CURSOR,

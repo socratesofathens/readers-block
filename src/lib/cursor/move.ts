@@ -1,51 +1,71 @@
 import { Board, Cursor } from '../../types'
 
-import letterAfter from '../after/letter'
-import rowAfter from '../after/row'
-
-import CURSOR from '.'
-
-function isSafe (letter: string): boolean {
-  const full = letter !== ''
-  const safe = full && letter != null
-
-  return safe
-}
+import letterAfter from '../letter/after'
+import letterReverse from '../letter/reverse'
+import positionAfter from '../after/position'
 
 export default function moveCursor (
   { board, cursor }: { board: Board, cursor: Cursor }
 ): Cursor {
   const row = board[cursor.row]
 
-  const startLetter = row[cursor.start]
-  const startSafe = isSafe(startLetter)
-
-  const nextEnd = cursor.end + 1
-  const nextEndLetter = row[nextEnd]
-  const nextEndSafe = isSafe(nextEndLetter)
-
-  const nextSafe = startSafe && nextEndSafe
-
-  if (nextSafe) {
-    const nextEndCursor = { ...cursor, end: nextEnd }
-
-    return nextEndCursor
+  const backward = !cursor.forward
+  const starting = cursor.end <= cursor.start
+  const complete = backward && starting
+  if (complete) {
+    cursor.forward = true
   }
 
-  const nextStart = cursor.start + 1
-  const { found, natural } = letterAfter({ row, start: nextStart })
+  if (cursor.forward) {
+    const nextStart = letterAfter({ row, start: cursor.start + 1 })
 
-  const isFound = found != null
-  const safe = isFound && natural
+    if (nextStart != null) {
+      const nextEnd = letterReverse({ row, start: nextStart })
 
-  if (safe) {
-    const nextStartCursor = { ...cursor, start: found, end: found }
+      if (nextEnd == null) {
+        const nextStartCursor = {
+          ...cursor, start: nextStart, end: nextStart, forward: false
+        }
 
-    return nextStartCursor
+        return nextStartCursor
+      }
+
+      const nextEndCursor = {
+        ...cursor, start: nextStart, end: nextEnd, forward: false
+      }
+
+      return nextEndCursor
+    }
+
+    const position = positionAfter({ board, row: cursor.row })
+
+    const next = position == null
+      ? positionAfter({ board, row: -1 })
+      : position
+
+    if (next == null) {
+      return cursor
+    }
+
+    const { x, y } = next
+
+    const afterRow = board[y]
+
+    const reversed = letterReverse({ row: afterRow, start: x })
+
+    if (reversed == null) {
+      throw new Error('Invalid reverse')
+    }
+
+    const nextRowCursor = {
+      row: y, start: x, end: reversed, forward: false, understanding: {}
+    }
+
+    return nextRowCursor
+  } else {
+    const nextEnd = cursor.end - 1
+    const nextCursor = { ...cursor, end: nextEnd }
+
+    return nextCursor
   }
-
-  const { x, y } = rowAfter({ board, row: cursor.row })
-  const nextRowCursor = { ...CURSOR, row: x, start: y, end: y }
-
-  return nextRowCursor
 }

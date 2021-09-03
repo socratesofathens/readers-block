@@ -1,4 +1,4 @@
-const ALPHABET = 'abcdefghijklmnopqrstuvwxyz'
+const ALPHABET = 'abcdefghijklmnoprstuvwaeiouaeiouaeiou'
 
 export default function Letter (): string {
   const emptyRandom = Math.random()

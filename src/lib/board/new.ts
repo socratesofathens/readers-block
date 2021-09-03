@@ -1,6 +1,6 @@
 import { Board } from '../../types'
 
-import Letter from '../Letter'
+import Letter from '../letter'
 
 import BOARD_SIZE from './size'
 

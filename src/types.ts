@@ -10,6 +10,7 @@ export interface Cursor {
   start: number
   end: number
   understanding: Understanding
+  forward: boolean
 }
 
 export type Results = Cursor[]
@@ -27,10 +28,9 @@ export interface Game {
   board: Board
   cursor: Cursor
   results: Results
-  setBoard?: any
 }
 
-export interface Find {
-  found: number
-  natural: boolean
+export interface Controller {
+  game: Game
+  setGame?: any
 }

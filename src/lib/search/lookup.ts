@@ -1,18 +1,19 @@
-import { Cursor, Game } from '../../types'
+import { Search, Game } from '../../types'
 
 import define from '../define'
 
-export default function lookupCursor (
+export default function LookupSearch (
   { board, cursor, results }: Game
-): Cursor {
+): Search {
   const row = board[cursor.row]
   const letters = row.slice(cursor.start, cursor.end + 1)
 
   const empty = letters.includes('')
   if (empty) {
     const emptyCursor = { ...cursor, understanding: { empty: true } }
+    const emptySearch = { cursor: emptyCursor, results }
 
-    return emptyCursor
+    return emptySearch
   }
 
   const word = letters.join('')
@@ -22,18 +23,28 @@ export default function lookupCursor (
   if (already) {
     const understanding = { word, already: true }
     const alreadyCursor = { ...cursor, understanding }
+    const alreadySearch = { cursor: alreadyCursor, results }
 
-    return alreadyCursor
+    return alreadySearch
   }
 
   const definition = define({ word })
 
-  const defined = {
+  const understanding = {
     word,
     definition
   }
 
-  const definedCursor = { ...cursor, understanding: defined }
+  const definedCursor = { ...cursor, understanding }
 
-  return definedCursor
+  if (definition == null) {
+    const undefinedSearch = { cursor: definedCursor, results }
+
+    return undefinedSearch
+  }
+
+  const definedResults = [...results, definedCursor]
+  const definedSearch = { cursor: definedCursor, results: definedResults }
+
+  return definedSearch
 }

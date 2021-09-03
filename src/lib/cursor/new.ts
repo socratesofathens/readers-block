@@ -1,18 +1,28 @@
 import CURSOR from '.'
 
-import { Cursor, Board } from '../../types'
+import { Cursor, Game } from '../../types'
+import positionAfter from '../after/position'
+import letterReverse from '../letter/reverse'
 
-import lookup from './lookup'
-import move from './move'
+export default function NewCursor ({ board }: Game): Cursor {
+  const position = positionAfter({ board, row: -1 })
+  if (position == null) {
+    return CURSOR
+  }
 
-export default function NewCursor ({ board }: { board: Board }): Cursor {
-  const first = board[0][0]
-  const isEmpty = first === ''
-  const moved = isEmpty
-    ? move({ board, cursor: CURSOR })
-    : CURSOR
+  const { x: start, y } = position
+  const row = board[y]
+  const end = letterReverse({ row, start })
 
-  const looked = lookup({ cursor: moved, board, results: [] })
+  if (end == null) {
+    const singleCursor = {
+      ...CURSOR, row: y, start, end: start, forward: false
+    }
 
-  return looked
+    return singleCursor
+  }
+
+  const rangeCursor = { ...CURSOR, row: y, start, end: end, forward: false }
+
+  return rangeCursor
 }
