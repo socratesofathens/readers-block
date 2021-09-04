@@ -9,7 +9,9 @@ interface CellProps {
   cursor: Cursor
 }
 
-function cellBackground ({ above, searching, cursor }: CellProps): string {
+function cellBackground (
+  { above, searching, cursor }: CellProps
+): string | undefined {
   const defined = cursor.understanding.definition != null
   if (above && defined) {
     return 'lightgreen'
@@ -26,11 +28,9 @@ function cellBackground ({ above, searching, cursor }: CellProps): string {
 
     return background
   }
-
-  return 'white'
 }
 
-function cellColor ({ searching, cursor }: CellProps): string {
+function cellColor ({ searching, cursor }: CellProps): string | undefined {
   if (searching) {
     const color = interpret({
       understanding: cursor.understanding,
@@ -42,8 +42,6 @@ function cellColor ({ searching, cursor }: CellProps): string {
 
     return color
   }
-
-  return 'black'
 }
 
 export default styled.div<CellProps>`

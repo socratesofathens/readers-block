@@ -3,10 +3,18 @@ import { Board, Cursor } from '../../types'
 import letterAfter from '../letter/after'
 import letterReverse from '../letter/reverse'
 import positionAfter from '../after/position'
+import NewCursor from './new'
 
 export default function moveCursor (
   { board, cursor }: { board: Board, cursor: Cursor }
 ): Cursor {
+  const defined = cursor.understanding.definition != null
+  if (defined) {
+    const newCursor = NewCursor({ board })
+
+    return newCursor
+  }
+
   const row = board[cursor.row]
 
   const backward = !cursor.forward

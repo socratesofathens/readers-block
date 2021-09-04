@@ -24,9 +24,9 @@ export default function useGame (): Game {
 
     const delay = interpret({
       understanding: game.cursor.understanding,
-      is: 1000,
+      is: 200,
       not: 0,
-      already: 200,
+      already: 0,
       empty: 10000
     })
 
