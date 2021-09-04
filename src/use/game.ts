@@ -1,45 +1,10 @@
 import { useEffect, useState } from 'react'
 import { useControllerContext } from '../context/controller'
 import NewCursor from '../lib/cursor/new'
+import nextGame from '../lib/game/next'
 import interpret from '../lib/interpret'
 import LookupSearch from '../lib/search/lookup'
-import NextSearch from '../lib/search/next'
-import { Board, Cursor, Game } from '../types'
-
-interface Field {
-  board: Board
-  cursor: Cursor
-}
-
-function remove (game: Game): Field {
-  const { board, cursor } = game
-  const defined = cursor.understanding.definition != null
-
-  if (defined) {
-    const newBoard = [...board]
-    const { row, start, end } = cursor
-    const oldRow = newBoard[row]
-    const newRow = [...oldRow]
-
-    const nextEnd = end + 1
-    const difference = nextEnd - start
-    const length = { length: difference }
-    const range = Array.from(length, (_, index) => index + start)
-    range.forEach(index => {
-      newRow[index] = ''
-    })
-
-    newBoard[row] = newRow
-
-    const newCursor = { ...cursor, forward: true }
-
-    const field = { board: newBoard, cursor: newCursor }
-
-    return field
-  }
-
-  return game
-}
+import { Game } from '../types'
 
 export default function useGame (): Game {
   const { game: controlled } = useControllerContext()
@@ -53,28 +18,16 @@ export default function useGame (): Game {
   const [game, setGame] = useState(initial)
 
   function effect (): () => void {
-    function set (game: Game): Game {
-      const { board: removedBoard, cursor: removedCursor } = remove(game)
-      const removedGame = {
-        ...game, board: removedBoard, cursor: removedCursor
-      }
-
-      const { cursor, results } = NextSearch(removedGame)
-      const newGame = { ...removedGame, cursor, results }
-
-      return newGame
-    }
-
     function tick (): void {
-      setGame?.(set)
+      setGame?.(nextGame)
     }
 
     const delay = interpret({
       understanding: game.cursor.understanding,
-      is: 100,
+      is: 250,
       not: 0,
-      empty: 0,
-      already: 100
+      already: 100,
+      empty: 10000
     })
 
     const interval = setInterval(tick, delay)

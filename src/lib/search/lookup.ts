@@ -21,7 +21,7 @@ export default function LookupSearch (
   const match = results.find(result => result.understanding?.word === word)
   const already = match != null
   if (already) {
-    const understanding = { word, already: true }
+    const understanding = { word, already }
     const alreadyCursor = { ...cursor, understanding }
     const alreadySearch = { cursor: alreadyCursor, results }
 
