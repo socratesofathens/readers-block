@@ -10,9 +10,10 @@ export default function CellView (
     columnIndex: number
   }
 ): JSX.Element {
-  const cursorRow = cursor.row === rowIndex
-  const cursorColumn = cursorRow && cursor.start <= columnIndex
-  const searching = cursorColumn && cursor.end >= columnIndex
+  const cursorStart = cursor.start <= columnIndex
+  const cursorEnd = cursorStart && cursor.end >= columnIndex
+  const searching = cursorEnd && cursor.row === rowIndex
+  const above = cursorEnd && cursor.row > rowIndex
 
   const title = searching
     ? cursor.understanding?.definition
@@ -24,6 +25,7 @@ export default function CellView (
   return (
     <CellStyle
       searching={searching}
+      above={above}
       cursor={cursor}
       title={title}
     >

@@ -4,11 +4,17 @@ import interpret from '../lib/interpret'
 import { Cursor } from '../types'
 
 interface CellProps {
+  above: boolean
   searching: boolean
   cursor: Cursor
 }
 
-function cellBackground ({ searching, cursor }: CellProps): string {
+function cellBackground ({ above, searching, cursor }: CellProps): string {
+  const defined = cursor.understanding.definition != null
+  if (above && defined) {
+    return 'lightgreen'
+  }
+
   if (searching) {
     const background = interpret({
       understanding: cursor.understanding,
