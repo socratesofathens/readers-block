@@ -10,7 +10,9 @@ export default function letterReverse ({ row, start }: {
 }): number | null {
   const tokenEnd = after<string>({ array: row, start, finder: isEmpty })
   if (tokenEnd == null) {
-    return row.length - 1
+    const rowEnd = row.length - 1
+
+    return rowEnd
   }
 
   const array = row.slice(0, tokenEnd)

@@ -19,53 +19,53 @@ export default function moveCursor (
   if (cursor.forward) {
     const nextStart = letterAfter({ row, start: cursor.start + 1 })
 
-    if (nextStart != null) {
-      const nextEnd = letterReverse({ row, start: nextStart })
+    if (nextStart == null) {
+      const position = positionAfter({ board, row: cursor.row })
 
-      if (nextEnd == null) {
-        const nextStartCursor = {
-          ...cursor, start: nextStart, end: nextStart, forward: false
-        }
+      const next = position == null
+        ? positionAfter({ board, row: -1 })
+        : position
 
-        return nextStartCursor
+      if (next == null) {
+        return cursor
       }
 
-      const nextEndCursor = {
-        ...cursor, start: nextStart, end: nextEnd, forward: false
+      const { x, y } = next
+
+      const afterRow = board[y]
+
+      const reversed = letterReverse({ row: afterRow, start: x })
+
+      if (reversed == null) {
+        throw new Error('Invalid reverse')
       }
 
-      return nextEndCursor
+      const nextRowCursor = {
+        row: y, start: x, end: reversed, forward: false, understanding: {}
+      }
+
+      return nextRowCursor
     }
 
-    const position = positionAfter({ board, row: cursor.row })
+    const nextEnd = letterReverse({ row, start: nextStart })
 
-    const next = position == null
-      ? positionAfter({ board, row: -1 })
-      : position
+    if (nextEnd == null) {
+      const nextStartCursor = {
+        ...cursor, start: nextStart, end: nextStart, forward: false
+      }
 
-    if (next == null) {
-      return cursor
+      return nextStartCursor
     }
 
-    const { x, y } = next
-
-    const afterRow = board[y]
-
-    const reversed = letterReverse({ row: afterRow, start: x })
-
-    if (reversed == null) {
-      throw new Error('Invalid reverse')
+    const nextEndCursor = {
+      ...cursor, start: nextStart, end: nextEnd, forward: false
     }
 
-    const nextRowCursor = {
-      row: y, start: x, end: reversed, forward: false, understanding: {}
-    }
-
-    return nextRowCursor
-  } else {
-    const nextEnd = cursor.end - 1
-    const nextCursor = { ...cursor, end: nextEnd }
-
-    return nextCursor
+    return nextEndCursor
   }
+
+  const nextEnd = cursor.end - 1
+  const nextCursor = { ...cursor, end: nextEnd }
+
+  return nextCursor
 }
