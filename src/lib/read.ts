@@ -5,61 +5,62 @@ interface Field {
   cursor: Cursor
 }
 
+function isReading ({ cursor, index }: {
+  cursor: Cursor
+  index: number
+}): boolean {
+  const start = index >= cursor.start
+  const reading = start && index <= cursor.end
+
+  return reading
+}
+
 export default function read (game: Game): Field {
   const notDefined = game.cursor.understanding.definition == null
   if (notDefined) return game
 
+  console.log('understanding test:', game.cursor.understanding)
   const reversed = [...game.board].reverse()
-  const cleared = reversed.map((row, reverse) => {
-    const index = game.board.length - reverse - 1
-    const cursor = index === game.cursor.row
-    if (cursor) {
-      const cursorRow = row.map((letter, index) => {
-        const start = index >= game.cursor.start
-        const cursor = start && index <= game.cursor.end
-
-        if (cursor) {
-          return ''
-        }
-
-        return letter
-      })
-
-      return cursorRow
-    }
-
-    const above = index < game.cursor.row
+  const cleared = reversed.map((row, reversedIndex) => {
+    console.log('row test:', JSON.parse(JSON.stringify(row)))
+    console.log('reversedIndex test:', reversedIndex)
+    console.log('game.board.length test:', game.board.length)
+    const rowIndex = game.board.length - reversedIndex - 1
+    console.log('rowIndex test:', rowIndex)
+    console.log('row test:', game.cursor.row)
+    const above = rowIndex <= game.cursor.row
+    console.log('above test:', above)
     if (above) {
-      const aboveRow = row.map((letter, index) => {
-        const start = index >= game.cursor.start
-        const cursor = start && index <= game.cursor.end
+      const aboveIndex = rowIndex - 1
+      console.log('aboveIndex test:', aboveIndex)
 
-        const aboveIndex = reverse + 1
-        const onBoard = aboveIndex < reversed.length
-        const falling = onBoard && cursor
-        if (falling) {
-          const aboveRow = reversed[aboveIndex]
-          const aboveLetter = aboveRow[index]
+      const fallenRow = row.map((letter, index) => {
+        const reading = isReading({ cursor: game.cursor, index })
+        if (!reading) return letter
 
-          return aboveLetter
-        }
+        const aboveRow = game.board[aboveIndex]
+        console.log('aboveRow test:', aboveRow)
 
-        if (cursor) {
+        if (aboveRow == null) {
           return ''
         }
 
-        return letter
-      })
+        const aboveLetter = aboveRow[index]
+        console.log('aboveLetter test:', aboveLetter)
 
-      return aboveRow
+        return aboveLetter
+      })
+      console.log('fallenRow test:', fallenRow)
+
+      return fallenRow
     }
 
     return row
   })
-  const board = cleared.reverse()
+  cleared.reverse()
 
   const cursor = { ...game.cursor, forward: true }
-  const field = { board, cursor }
+  const field = { board: cleared, cursor }
 
   return field
 }
