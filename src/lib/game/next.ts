@@ -8,8 +8,8 @@ export default function nextGame (game: Game): Game {
     ...game, board: readBoard, cursor: readCursor
   }
 
-  const { cursor, results } = NextSearch(readGame)
-  const newGame = { ...readGame, cursor, results }
+  const { cursor, history } = NextSearch(readGame)
+  const newGame = { ...readGame, cursor, history }
 
   return newGame
 }

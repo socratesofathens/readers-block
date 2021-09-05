@@ -5,9 +5,11 @@ import ListStyle from '../style/List'
 import ItemView from '../view/Item'
 
 export default function ListController (): JSX.Element {
-  const { results } = useSearchContext()
+  const { history } = useSearchContext()
 
-  const items = results.map(({ understanding }) => {
+  const words = history.filter(({ understanding }) => understanding.definition)
+
+  const items = words.map(({ understanding }) => {
     const item = (
       <ItemView key={understanding.word} understanding={understanding} />
     )

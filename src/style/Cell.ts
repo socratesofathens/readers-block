@@ -1,51 +1,20 @@
 import styled from 'styled-components'
-import interpret from '../lib/interpret'
-
-import { Cursor } from '../types'
 
 interface CellProps {
-  above: boolean
-  searching: boolean
-  cursor: Cursor
+  color?: string
 }
 
-function cellBackground (
-  { above, searching, cursor }: CellProps
-): string | undefined {
-  const defined = cursor.understanding.definition != null
-  if (above && defined) {
-    return 'lightgreen'
-  }
+function cellColor ({ color }: CellProps): string | false {
+  if (color == null) return false
 
-  if (searching) {
-    const background = interpret({
-      understanding: cursor.understanding,
-      is: 'green',
-      not: 'red',
-      empty: 'lightgray',
-      already: 'yellow'
-    })
+  const colors = ['green', 'red']
+  const light = colors.includes(color) && 'white'
 
-    return background
-  }
-}
-
-function cellColor ({ searching, cursor }: CellProps): string | undefined {
-  if (searching) {
-    const color = interpret({
-      understanding: cursor.understanding,
-      is: 'white',
-      not: 'black',
-      empty: 'black',
-      already: 'black'
-    })
-
-    return color
-  }
+  return light
 }
 
 export default styled.div<CellProps>`
-  background: ${cellBackground};
+  background: ${props => props.color};
   color: ${cellColor};
   border: 1px solid black;
   display: flex;

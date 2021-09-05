@@ -17,7 +17,8 @@ export type Results = Cursor[]
 
 export interface Search {
   cursor: Cursor
-  results: Results
+  history: Results
+  matches?: string []
 }
 
 export type Row = string[]
@@ -27,7 +28,7 @@ export type Board = Row[]
 export interface Game {
   board: Board
   cursor: Cursor
-  results: Results
+  history: Results
 }
 
 export interface Controller {

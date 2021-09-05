@@ -9,15 +9,16 @@ export default function CellController (
     columnIndex: number
   }
 ): JSX.Element {
-  const { board } = useGameContext()
+  const { board, history } = useGameContext()
   const { cursor } = useSearchContext()
 
   return (
     <CellView
       board={board}
-      cursor={cursor}
-      rowIndex={rowIndex}
       columnIndex={columnIndex}
+      cursor={cursor}
+      history={history}
+      rowIndex={rowIndex}
     />
   )
 }

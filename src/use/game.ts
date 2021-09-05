@@ -11,9 +11,9 @@ export default function useGame (): Game {
 
   const newCursor = NewCursor(controlled)
   const newGame = { ...controlled, cursor: newCursor }
-  const { cursor, results } = LookupSearch(newGame)
+  const { cursor, history } = LookupSearch(newGame)
 
-  const initial = { ...newGame, cursor, results }
+  const initial = { ...newGame, cursor, history }
 
   const [game, setGame] = useState(initial)
 

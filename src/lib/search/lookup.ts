@@ -1,50 +1,14 @@
 import { Search, Game } from '../../types'
-
-import define from '../define'
+import LookupCursor from '../cursor/lookup'
 
 export default function LookupSearch (
-  { board, cursor, results }: Game
+  { board, cursor, history }: Game
 ): Search {
-  const row = board[cursor.row]
-  const letters = row.slice(cursor.start, cursor.end + 1)
+  const lookedCursor = LookupCursor({ board, cursor, history })
 
-  const empty = letters.includes('')
-  if (empty) {
-    const emptyCursor = { ...cursor, understanding: { empty: true } }
-    const emptySearch = { cursor: emptyCursor, results }
+  const lookedHistory = [...history, lookedCursor]
 
-    return emptySearch
-  }
+  const lookedSearch = { cursor: lookedCursor, history: lookedHistory }
 
-  const word = letters.join('')
-
-  const match = results.find(result => result.understanding?.word === word)
-  const already = match != null
-  if (already) {
-    const understanding = { word, already }
-    const alreadyCursor = { ...cursor, understanding }
-    const alreadySearch = { cursor: alreadyCursor, results }
-
-    return alreadySearch
-  }
-
-  const definition = define({ word })
-
-  const understanding = {
-    word,
-    definition
-  }
-
-  const definedCursor = { ...cursor, understanding }
-
-  if (definition == null) {
-    const undefinedSearch = { cursor: definedCursor, results }
-
-    return undefinedSearch
-  }
-
-  const definedResults = [...results, definedCursor]
-  const definedSearch = { cursor: definedCursor, results: definedResults }
-
-  return definedSearch
+  return lookedSearch
 }
