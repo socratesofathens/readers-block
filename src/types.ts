@@ -15,13 +15,12 @@ export interface Cursor {
 
 export type Results = Cursor[]
 
-export interface Search {
-  cursor: Cursor
-  history: Results
-  matches?: string []
+export interface Block {
+  letter?: string
+  color?: string
 }
 
-export type Row = string[]
+export type Row = Block[]
 
 export type Board = Row[]
 
@@ -29,6 +28,7 @@ export interface Game {
   board: Board
   cursor: Cursor
   history: Results
+  words: Results
 }
 
 export interface Controller {

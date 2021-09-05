@@ -1,9 +1,10 @@
 import Block from '../controller/Cell'
+import { Row } from '../types'
 
-export default function Row (
-  { row, rowIndex }: { row: string[], rowIndex: number }
+export default function RowView (
+  { row, rowIndex }: { row: Row, rowIndex: number }
 ): JSX.Element {
-  const blocks = row.map((letter, index) => (
+  const blocks = row.map((block, index) => (
     <Block
       key={index} rowIndex={rowIndex} columnIndex={index}
     />

@@ -2,11 +2,12 @@ import { Cursor, Game } from '../../types'
 
 import define from '../define'
 
-export default function LookupCursor (
-  { board, cursor, history }: Game
+export default function lookupCursor (
+  { board, cursor, words }: Game
 ): Cursor {
   const row = board[cursor.row]
-  const letters = row.slice(cursor.start, cursor.end + 1)
+  const blocks = row.slice(cursor.start, cursor.end + 1)
+  const letters = blocks.map(block => block.letter)
 
   const empty = letters.includes('')
   if (empty) {
@@ -17,7 +18,7 @@ export default function LookupCursor (
 
   const word = letters.join('')
 
-  const match = history.find(cursor => cursor.understanding?.word === word)
+  const match = words.find(cursor => cursor.understanding?.word === word)
   const already = match != null
   if (already) {
     const understanding = { word, already }

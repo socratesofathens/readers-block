@@ -1,20 +1,13 @@
-import { Board } from '../../types'
-
-import Letter from '../letter'
+import { Board, Row } from '../../types'
+import letterBlock from '../block/letter'
 
 import BOARD_SIZE from './size'
 
-export default function NewBoard (
-  options?: { writer: () => string }
-): Board {
-  const callback = options == null
-    ? Letter
-    : options.writer
+export default function NewBoard (): Board {
+  function Row (): Row {
+    const row = Array.from({ length: BOARD_SIZE.width }, letterBlock)
 
-  function Row (): string[] {
-    const cells = Array.from({ length: BOARD_SIZE.width }, callback)
-
-    return cells
+    return row
   }
 
   const board = Array.from({ length: BOARD_SIZE.height }, Row)

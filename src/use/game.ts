@@ -1,9 +1,14 @@
 import { useEffect, useState } from 'react'
+
 import { useControllerContext } from '../context/controller'
+
+import LookupCursor from '../lib/cursor/lookup'
 import NewCursor from '../lib/cursor/new'
+
 import nextGame from '../lib/game/next'
+
 import interpret from '../lib/interpret'
-import LookupSearch from '../lib/search/lookup'
+
 import { Game } from '../types'
 
 export default function useGame (): Game {
@@ -11,7 +16,8 @@ export default function useGame (): Game {
 
   const newCursor = NewCursor(controlled)
   const newGame = { ...controlled, cursor: newCursor }
-  const { cursor, history } = LookupSearch(newGame)
+  const cursor = LookupCursor(newGame)
+  const history = [...newGame.history, cursor]
 
   const initial = { ...newGame, cursor, history }
 
@@ -24,7 +30,7 @@ export default function useGame (): Game {
 
     const delay = interpret({
       understanding: game.cursor.understanding,
-      is: 200,
+      is: 0,
       not: 0,
       already: 0,
       empty: 10000

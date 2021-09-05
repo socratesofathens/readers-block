@@ -1,12 +1,11 @@
 import { Board, Row } from '../../types'
+
+import NewBlock from '../block/new'
+
 import BOARD_SIZE from './size'
 
-function Empty (): string {
-  return ''
-}
-
 function EmptyRow (): Row {
-  const cells = Array.from({ length: BOARD_SIZE.width }, Empty)
+  const cells = Array.from({ length: BOARD_SIZE.width }, NewBlock)
 
   return cells
 }

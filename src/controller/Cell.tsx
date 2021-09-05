@@ -1,5 +1,4 @@
 import { useGameContext } from '../context/game'
-import { useSearchContext } from '../context/search'
 
 import CellView from '../view/Cell'
 
@@ -9,8 +8,7 @@ export default function CellController (
     columnIndex: number
   }
 ): JSX.Element {
-  const { board, history } = useGameContext()
-  const { cursor } = useSearchContext()
+  const { board, history, cursor } = useGameContext()
 
   return (
     <CellView
