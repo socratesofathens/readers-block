@@ -1,5 +1,8 @@
 import styled from 'styled-components'
 
-export default styled.div`
+import BoxStyle from './Box'
+
+export default styled(BoxStyle)`
   margin: 5px;
+  padding: 5px;
 `

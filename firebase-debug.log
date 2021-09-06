@@ -1,0 +1,101 @@
+[debug] [2021-09-06T13:36:52.974Z] ----------------------------------------------------------------------
+[debug] [2021-09-06T13:36:52.976Z] Command:       /home/david/.nvm/versions/node/v15.8.0/bin/node /home/david/.nvm/versions/node/v15.8.0/bin/firebase deploy
+[debug] [2021-09-06T13:36:52.976Z] CLI Version:   9.16.0
+[debug] [2021-09-06T13:36:52.976Z] Platform:      linux
+[debug] [2021-09-06T13:36:52.976Z] Node Version:  v15.8.0
+[debug] [2021-09-06T13:36:52.977Z] Time:          Mon Sep 06 2021 15:36:52 GMT+0200 (Central European Summer Time)
+[debug] [2021-09-06T13:36:52.977Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2021-09-06T13:36:53.026Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2021-09-06T13:36:53.026Z] > authorizing via signed-in user (david@davidystephenson.com)
+[debug] [2021-09-06T13:36:53.027Z] [iam] checking project readers-block-react for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2021-09-06T13:36:53.028Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2021-09-06T13:36:53.029Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2021-09-06T13:36:53.502Z] <<< HTTP RESPONSE 200 {"cache-control":"no-cache, no-store, max-age=0, must-revalidate","expires":"Mon, 01 Jan 1990 00:00:00 GMT","date":"Mon, 06 Sep 2021 13:36:53 GMT","pragma":"no-cache","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-09-06T13:36:53.516Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/readers-block-react:testIamPermissions  
+ {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2021-09-06T13:36:54.242Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Mon, 06 Sep 2021 13:36:54 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=578","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-09-06T13:36:54.244Z] > refreshing access token with scopes: []
+[debug] [2021-09-06T13:36:54.245Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2021-09-06T13:36:54.448Z] <<< HTTP RESPONSE 200 {"cache-control":"no-cache, no-store, max-age=0, must-revalidate","pragma":"no-cache","date":"Mon, 06 Sep 2021 13:36:54 GMT","expires":"Mon, 01 Jan 1990 00:00:00 GMT","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-09-06T13:36:54.476Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/readers-block-react [none]
+[debug] [2021-09-06T13:36:54.940Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/readers-block-react 200
+[debug] [2021-09-06T13:36:54.940Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/readers-block-react {"projectId":"readers-block-react","projectNumber":"97563057243","displayName":"readers-block-react","name":"projects/readers-block-react","resources":{"hostingSite":"readers-block-react"},"state":"ACTIVE"}
+[info] 
+[info] === Deploying to 'readers-block-react'...
+[info] 
+[info] i  deploying hosting 
+[debug] [2021-09-06T13:36:54.944Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2021-09-06T13:36:54.944Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2021-09-06T13:36:55.093Z] <<< HTTP RESPONSE 200 {"expires":"Mon, 01 Jan 1990 00:00:00 GMT","cache-control":"no-cache, no-store, max-age=0, must-revalidate","date":"Mon, 06 Sep 2021 13:36:55 GMT","pragma":"no-cache","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-09-06T13:36:55.109Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/readers-block-react/versions  
+ {"config":{"rewrites":[{"glob":"**","path":"/index.html"}]},"labels":{"deployment-tool":"cli-firebase"}}
+[debug] [2021-09-06T13:36:56.777Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Mon, 06 Sep 2021 13:36:56 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] i  hosting[readers-block-react]: beginning deploy... 
+[info] i  hosting[readers-block-react]: found 14 files in build 
+[debug] [2021-09-06T13:36:58.911Z] > refreshing access token with scopes: []
+[debug] [2021-09-06T13:36:58.912Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2021-09-06T13:36:58.913Z] [hosting] hash cache [YnVpbGQ] stored for 14 files
+[debug] [2021-09-06T13:36:58.913Z] [hosting][hash queue][FINAL] {"max":2100,"min":14,"avg":171.42857142857142,"active":0,"complete":14,"success":14,"errored":0,"retried":0,"total":14,"elapsed":2108}
+[debug] [2021-09-06T13:36:59.049Z] <<< HTTP RESPONSE 200 {"expires":"Mon, 01 Jan 1990 00:00:00 GMT","cache-control":"no-cache, no-store, max-age=0, must-revalidate","pragma":"no-cache","date":"Mon, 06 Sep 2021 13:36:59 GMT","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-09-06T13:36:59.063Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/sites/readers-block-react/versions/c327d3b00c358d47:populateFiles [none]
+[debug] [2021-09-06T13:36:59.063Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/sites/readers-block-react/versions/c327d3b00c358d47:populateFiles {"files":{"/asset-manifest.json":"ab08460820ecb36c5eae42450974440a5097fae2e8fd3fd1c387c93a3bd2e57d","/favicon.ico":"c599b7a91ab3627e3538125d9f40adc2d4bf949046984262670545dc7738af06","/index.html":"a55628ac027e4dbedc6eb53d6756928903c20d674a1cdddc786f2a716420b22c","/manifest.json":"0958a5e0c831126100c8c2d06a6bbaa665a3900f21aaff4130238a6f5a113aa1","/robots.txt":"2544ca049f223a42bff01f72ad930a5edba75bbb7199d0f8430a02ff5aca16ec","/logo192.png":"76c449ccb9cd117c2f2338f091b18f7050f3210e249b2228f5c81b23f34377cd","/static/js/2.0cffa87d.chunk.js.LICENSE.txt":"b30e22dfebdd3595a280fe0df1be547e4bc89e26cd3ba6dda16e3c206181c896","/logo512.png":"7779210d56c1f3741e2e487799fe3092def4fa6ac450a60532b807c3a8971205","/static/js/runtime-main.525efb5a.js":"95f0d1c282da9960a7dfdfd4e221229cc5be942fa4111fbfd99557a92a5501ad","/static/js/runtime-main.525efb5a.js.map":"be99365ec0e658b82d3be7721ca8f73e455e71a2df6679246030f3e70eb10a8e","/static/js/main.334fac10.chunk.js.map":"66418ccd61c18f2f80d604926ea851411bf4a06188ac524f7504da90005a85bd","/static/js/2.0cffa87d.chunk.js":"f694d0dfc7099f44c38f5ef0531a41aca0df3ec34da1c537e1a719a31baea1d7","/static/js/2.0cffa87d.chunk.js.map":"843559cb90c706927a7f48b38338cf3680edec9da9e8a559088e8e4d7e0346cc","/static/js/main.334fac10.chunk.js":"1b3af95e533a46ce7f94c8b0fdca9916a850de6ad68f913097c89b11bad07296"}}
+[debug] [2021-09-06T13:37:00.054Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/sites/readers-block-react/versions/c327d3b00c358d47:populateFiles 200
+[debug] [2021-09-06T13:37:00.055Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/sites/readers-block-react/versions/c327d3b00c358d47:populateFiles {"uploadRequiredHashes":["1b3af95e533a46ce7f94c8b0fdca9916a850de6ad68f913097c89b11bad07296","a55628ac027e4dbedc6eb53d6756928903c20d674a1cdddc786f2a716420b22c","ab08460820ecb36c5eae42450974440a5097fae2e8fd3fd1c387c93a3bd2e57d","66418ccd61c18f2f80d604926ea851411bf4a06188ac524f7504da90005a85bd"],"uploadUrl":"https://upload-firebasehosting.googleapis.com/upload/sites/readers-block-react/versions/c327d3b00c358d47/files"}
+[debug] [2021-09-06T13:37:00.056Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/readers-block-react/versions/c327d3b00c358d47/files/1b3af95e533a46ce7f94c8b0fdca9916a850de6ad68f913097c89b11bad07296 [none]
+[debug] [2021-09-06T13:37:00.056Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/readers-block-react/versions/c327d3b00c358d47/files/1b3af95e533a46ce7f94c8b0fdca9916a850de6ad68f913097c89b11bad07296 [stream]
+[debug] [2021-09-06T13:37:00.057Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/readers-block-react/versions/c327d3b00c358d47/files/a55628ac027e4dbedc6eb53d6756928903c20d674a1cdddc786f2a716420b22c [none]
+[debug] [2021-09-06T13:37:00.057Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/readers-block-react/versions/c327d3b00c358d47/files/a55628ac027e4dbedc6eb53d6756928903c20d674a1cdddc786f2a716420b22c [stream]
+[debug] [2021-09-06T13:37:00.058Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/readers-block-react/versions/c327d3b00c358d47/files/ab08460820ecb36c5eae42450974440a5097fae2e8fd3fd1c387c93a3bd2e57d [none]
+[debug] [2021-09-06T13:37:00.058Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/readers-block-react/versions/c327d3b00c358d47/files/ab08460820ecb36c5eae42450974440a5097fae2e8fd3fd1c387c93a3bd2e57d [stream]
+[debug] [2021-09-06T13:37:00.059Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/readers-block-react/versions/c327d3b00c358d47/files/66418ccd61c18f2f80d604926ea851411bf4a06188ac524f7504da90005a85bd [none]
+[debug] [2021-09-06T13:37:00.059Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/readers-block-react/versions/c327d3b00c358d47/files/66418ccd61c18f2f80d604926ea851411bf4a06188ac524f7504da90005a85bd [stream]
+[debug] [2021-09-06T13:37:00.059Z] [hosting][populate queue][FINAL] {"max":1145,"min":1145,"avg":1145,"active":0,"complete":1,"success":1,"errored":0,"retried":0,"total":1,"elapsed":1148}
+[debug] [2021-09-06T13:37:00.060Z] [hosting] uploads queued: 4
+[debug] [2021-09-06T13:37:01.344Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/readers-block-react/versions/c327d3b00c358d47/files/ab08460820ecb36c5eae42450974440a5097fae2e8fd3fd1c387c93a3bd2e57d 200
+[debug] [2021-09-06T13:37:01.345Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/readers-block-react/versions/c327d3b00c358d47/files/ab08460820ecb36c5eae42450974440a5097fae2e8fd3fd1c387c93a3bd2e57d [stream]
+[debug] [2021-09-06T13:37:01.587Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/readers-block-react/versions/c327d3b00c358d47/files/a55628ac027e4dbedc6eb53d6756928903c20d674a1cdddc786f2a716420b22c 200
+[debug] [2021-09-06T13:37:01.587Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/readers-block-react/versions/c327d3b00c358d47/files/a55628ac027e4dbedc6eb53d6756928903c20d674a1cdddc786f2a716420b22c [stream]
+[debug] [2021-09-06T13:37:01.621Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/readers-block-react/versions/c327d3b00c358d47/files/66418ccd61c18f2f80d604926ea851411bf4a06188ac524f7504da90005a85bd 200
+[debug] [2021-09-06T13:37:01.621Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/readers-block-react/versions/c327d3b00c358d47/files/66418ccd61c18f2f80d604926ea851411bf4a06188ac524f7504da90005a85bd [stream]
+[debug] [2021-09-06T13:37:03.433Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/readers-block-react/versions/c327d3b00c358d47/files/1b3af95e533a46ce7f94c8b0fdca9916a850de6ad68f913097c89b11bad07296 200
+[debug] [2021-09-06T13:37:03.434Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/readers-block-react/versions/c327d3b00c358d47/files/1b3af95e533a46ce7f94c8b0fdca9916a850de6ad68f913097c89b11bad07296 [stream]
+[debug] [2021-09-06T13:37:03.434Z] [hosting][upload queue][FINAL] {"max":3379,"min":1289,"avg":1941,"active":0,"complete":4,"success":4,"errored":0,"retried":0,"total":4,"elapsed":3379}
+[info] ✔  hosting[readers-block-react]: file upload complete 
+[debug] [2021-09-06T13:37:03.435Z] [hosting] deploy completed after 6656ms
+[debug] [2021-09-06T13:37:03.439Z] [
+  {
+    "config": {
+      "public": "build",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ],
+      "site": "readers-block-react"
+    },
+    "site": "readers-block-react",
+    "version": "sites/readers-block-react/versions/c327d3b00c358d47"
+  }
+]
+[info] i  hosting[readers-block-react]: finalizing version... 
+[debug] [2021-09-06T13:37:03.441Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2021-09-06T13:37:03.442Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2021-09-06T13:37:03.571Z] <<< HTTP RESPONSE 200 {"cache-control":"no-cache, no-store, max-age=0, must-revalidate","date":"Mon, 06 Sep 2021 13:37:03 GMT","pragma":"no-cache","expires":"Mon, 01 Jan 1990 00:00:00 GMT","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-09-06T13:37:03.592Z] >>> HTTP REQUEST PATCH https://firebasehosting.googleapis.com/v1beta1/sites/readers-block-react/versions/c327d3b00c358d47?updateMask=status  
+ {"status":"FINALIZED"}
+[debug] [2021-09-06T13:37:03.668Z] Error: connect EHOSTUNREACH 142.250.179.202:443
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1137:16)
+[error] 
+[error] Error: Server Error. connect EHOSTUNREACH 142.250.179.202:443
