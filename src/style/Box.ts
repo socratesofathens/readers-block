@@ -7,7 +7,7 @@ interface BoxProps {
 function boxColor ({ color }: BoxProps): string | false {
   if (color == null) return false
 
-  const colors = ['green', 'red']
+  const colors = ['green', 'red', 'black']
   const light = colors.includes(color) && 'white'
 
   return light

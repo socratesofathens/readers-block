@@ -4,6 +4,7 @@ import letterAfter from '../letter/after'
 import letterReverse from '../letter/reverse'
 import positionAfter from '../after/position'
 import NewCursor from './new'
+import CURSOR from '.'
 
 export default function moveCursor (
   { board, cursor }: { board: Board, cursor: Cursor }
@@ -30,15 +31,26 @@ export default function moveCursor (
     if (nextStart == null) {
       const position = positionAfter({ board, row: cursor.row })
 
-      const next = position == null
-        ? positionAfter({ board, row: -1 })
-        : position
+      if (position == null) {
+        const position = positionAfter({ board, row: -1 })
 
-      if (next == null) {
-        return cursor
+        if (position == null) {
+          return CURSOR
+        }
+
+        const { x, y } = position
+
+        const afterRow = board[y]
+        const reversed = letterReverse({ row: afterRow, start: x })
+
+        if (reversed == null) {
+          throw new Error('Invalid reverse')
+        }
+
+        return { ...CURSOR, row: y, start: x, end: reversed, invisible: true }
       }
 
-      const { x, y } = next
+      const { x, y } = position
 
       const afterRow = board[y]
 
@@ -49,7 +61,12 @@ export default function moveCursor (
       }
 
       const nextRowCursor = {
-        row: y, start: x, end: reversed, forward: false, understanding: {}
+        ...cursor,
+        row: y,
+        start: x,
+        end: reversed,
+        forward: false,
+        understanding: {}
       }
 
       return nextRowCursor

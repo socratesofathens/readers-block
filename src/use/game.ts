@@ -23,24 +23,26 @@ export default function useGame (): Game {
 
   const [game, setGame] = useState(initial)
 
-  function effect (): () => void {
+  type Effecter = () => void
+
+  function effect (): undefined | Effecter {
     function tick (): void {
       setGame?.(nextGame)
     }
 
-    const delay = interpret({
-      understanding: game.cursor.understanding,
-      is: 0,
-      not: 0,
-      already: 0,
-      empty: 10000
-    })
+    const delay = game.block == null
+      ? interpret({
+        understanding: game.cursor.understanding,
+        is: 0,
+        not: 0,
+        already: 0,
+        empty: 20000
+      })
+      : 200
 
     const interval = setInterval(tick, delay)
 
-    function clear (): void {
-      return clearInterval(interval)
-    }
+    const clear = (): void => clearInterval(interval)
 
     return clear
   }

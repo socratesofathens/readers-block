@@ -1,10 +1,13 @@
-import { Brick } from '../../types'
+import { Brick, Position } from '../../types'
 import Letter from '../letter'
-import NewBrick from './new'
+import newBrick from './new'
 
-export default function letterBrick (): Brick {
+export default function letterBrick (options?: {
+  color?: string
+  position?: Position
+}): Brick {
   const letter = Letter()
-  const brick = NewBrick({ letter })
+  const brick = newBrick({ letter, ...options })
 
   return brick
 }

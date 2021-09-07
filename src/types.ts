@@ -11,6 +11,7 @@ export interface Cursor {
   end: number
   understanding: Understanding
   forward: boolean
+  invisible: boolean
 }
 
 export type Results = Cursor[]

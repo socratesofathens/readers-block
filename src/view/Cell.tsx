@@ -2,17 +2,35 @@ import cursorSearching from '../lib/cursor/searching'
 import interpret from '../lib/interpret'
 import CellStyle from '../style/Cell'
 
-import { Board, Cursor, Results } from '../types'
+import { Block, Board, Cursor, Results } from '../types'
 
 export default function CellView (
-  { board, cursor, history, rowIndex, columnIndex }: {
+  { board, cursor, history, rowIndex, columnIndex, block }: {
     board: Board
     cursor: Cursor
     history: Results
     rowIndex: number
     columnIndex: number
+    block?: Block
   }
 ): JSX.Element {
+  if (block != null) {
+    const blockBrick = block.bricks.find(brick => {
+      const y = brick.position?.y === rowIndex
+      const x = y && brick.position?.x === columnIndex
+
+      return x
+    })
+
+    if (blockBrick != null) {
+      return (
+        <CellStyle color={blockBrick.color}>
+          {blockBrick.letter}
+        </CellStyle>
+      )
+    }
+  }
+
   const row = board[rowIndex]
   const brick = row[columnIndex]
 
@@ -21,6 +39,16 @@ export default function CellView (
   })
 
   if (searching) {
+    console.log('cursor test:', cursor)
+    if (cursor.invisible) {
+      console.log('invisible test:')
+      return (
+        <CellStyle>
+          {brick.letter}
+        </CellStyle>
+      )
+    }
+
     const color = interpret({
       understanding: cursor.understanding,
       is: 'green',

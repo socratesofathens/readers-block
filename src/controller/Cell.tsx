@@ -8,7 +8,7 @@ export default function CellController (
     columnIndex: number
   }
 ): JSX.Element {
-  const { board, history, cursor } = useGameContext()
+  const { board, history, cursor, block } = useGameContext()
 
   return (
     <CellView
@@ -17,6 +17,7 @@ export default function CellController (
       cursor={cursor}
       history={history}
       rowIndex={rowIndex}
+      block={block}
     />
   )
 }
