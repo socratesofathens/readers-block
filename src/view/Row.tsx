@@ -1,18 +1,18 @@
-import Block from '../controller/Cell'
+import CellController from '../controller/Cell'
 import { Row } from '../types'
 
 export default function RowView (
   { row, rowIndex }: { row: Row, rowIndex: number }
 ): JSX.Element {
-  const blocks = row.map((block, index) => (
-    <Block
+  const cells = row.map((cell, index) => (
+    <CellController
       key={index} rowIndex={rowIndex} columnIndex={index}
     />
   ))
 
   return (
     <>
-      {blocks}
+      {cells}
     </>
   )
 }

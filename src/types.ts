@@ -15,20 +15,33 @@ export interface Cursor {
 
 export type Results = Cursor[]
 
-export interface Block {
-  letter?: string
-  color?: string
+export interface Position {
+  x: number
+  y: number
 }
 
-export type Row = Block[]
+export interface Brick {
+  letter?: string
+  color?: string
+  position?: Position
+}
+
+export type Row = Brick[]
 
 export type Board = Row[]
+
+export interface Block {
+  bricks: Brick[]
+  center: Position
+  shape: string
+}
 
 export interface Game {
   board: Board
   cursor: Cursor
   history: Results
   words: Results
+  block?: Block
 }
 
 export interface Controller {

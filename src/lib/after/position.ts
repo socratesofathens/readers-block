@@ -1,12 +1,7 @@
-import { Board, Row } from '../../types'
+import { Board, Position, Row } from '../../types'
 
 import letterAfter from '../letter/after'
 import after from '.'
-
-interface Position {
-  x: number
-  y: number
-}
 
 export default function positionAfter ({ board, row }: {
   board: Board

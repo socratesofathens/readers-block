@@ -1,11 +1,11 @@
 import { Board, Row } from '../../types'
 
-import NewBlock from '../block/new'
+import NewBrick from '../brick/new'
 
 import BOARD_SIZE from './size'
 
 function EmptyRow (): Row {
-  const cells = Array.from({ length: BOARD_SIZE.width }, NewBlock)
+  const cells = Array.from({ length: BOARD_SIZE.width }, NewBrick)
 
   return cells
 }

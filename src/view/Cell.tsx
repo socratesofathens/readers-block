@@ -14,7 +14,7 @@ export default function CellView (
   }
 ): JSX.Element {
   const row = board[rowIndex]
-  const block = row[columnIndex]
+  const brick = row[columnIndex]
 
   const searching = cursorSearching({
     cursor, column: columnIndex, row: rowIndex
@@ -34,7 +34,7 @@ export default function CellView (
         color={color}
         title={cursor.understanding?.definition}
       >
-        {block.letter}
+        {brick.letter}
       </CellStyle>
     )
   }
@@ -51,7 +51,7 @@ export default function CellView (
   if (result == null) {
     return (
       <CellStyle>
-        {block.letter}
+        {brick.letter}
       </CellStyle>
     )
   }
@@ -62,10 +62,10 @@ export default function CellView (
 
   return (
     <CellStyle
-      color={block.color}
+      color={brick.color}
       title={title}
     >
-      {block.letter}
+      {brick.letter}
     </CellStyle>
   )
 }

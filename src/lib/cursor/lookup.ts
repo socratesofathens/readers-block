@@ -6,8 +6,8 @@ export default function lookupCursor (
   { board, cursor, words }: Game
 ): Cursor {
   const row = board[cursor.row]
-  const blocks = row.slice(cursor.start, cursor.end + 1)
-  const letters = blocks.map(block => block.letter)
+  const bricks = row.slice(cursor.start, cursor.end + 1)
+  const letters = bricks.map(brick => brick.letter)
 
   const empty = letters.includes('')
   if (empty) {

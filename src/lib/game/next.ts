@@ -17,7 +17,7 @@ export default function nextGame (game: Game): Game {
   const cursor = lookupCursor(movedGame)
 
   const board = movedGame.board.map((row, rowIndex) => {
-    const newRow = row.map((block, columnIndex) => {
+    const newRow = row.map((brick, columnIndex) => {
       const searching = cursorSearching({
         cursor, row: rowIndex, column: columnIndex
       })
@@ -31,20 +31,25 @@ export default function nextGame (game: Game): Game {
           empty: 'lightgray'
         })
 
-        return { ...block, color }
+        return { ...brick, color }
       }
 
-      return block
+      return brick
     })
 
     return newRow
   })
 
-  const history = [...movedGame.history, cursor]
+  const movedHistory = [...movedGame.history, cursor]
+  const notDefined = cursor.understanding.definition == null
 
-  const words = cursor.understanding.definition == null
+  const words = notDefined
     ? movedGame.words
     : [...movedGame.words, cursor]
+
+  const history = notDefined
+    ? movedHistory
+    : movedHistory.filter(cursor => cursor.understanding.definition)
 
   const newGame = { ...movedGame, board, cursor, history, words }
 

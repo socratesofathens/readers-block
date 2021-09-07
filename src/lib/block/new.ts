@@ -1,12 +1,14 @@
-import { Block } from '../../types'
+import { Block, Brick } from '../../types'
+
+import BRICK from '../brick'
 
 import BLOCK from '.'
 
-export default function NewBlock (options?: {
-  letter?: string
-  color?: string
-}): Block {
-  const block = { ...BLOCK, ...options }
+function brickBlock (): Brick { return BRICK }
 
-  return block
+export default function newBrick (): Block {
+  const bricks = Array.from({ length: 4 }, brickBlock)
+  console.log('bricks test:', bricks)
+
+  return BLOCK
 }

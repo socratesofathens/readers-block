@@ -1,11 +1,11 @@
 import { Board, Row } from '../../types'
-import letterBlock from '../block/letter'
+import boardBrick from '../brick/board'
 
 import BOARD_SIZE from './size'
 
 export default function NewBoard (): Board {
   function Row (): Row {
-    const row = Array.from({ length: BOARD_SIZE.width }, letterBlock)
+    const row = Array.from({ length: BOARD_SIZE.width }, boardBrick)
 
     return row
   }

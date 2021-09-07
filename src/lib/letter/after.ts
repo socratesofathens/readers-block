@@ -1,12 +1,12 @@
 import after from '../after'
-import { Block, Row } from '../../types'
+import { Brick, Row } from '../../types'
 import isLetter from './is'
 
 export default function letterAfter ({ row, start }: {
   row: Row
   start: number
 }): number | null {
-  const letter = after<Block>({
+  const letter = after<Brick>({
     array: row, start, finder: isLetter
   })
 

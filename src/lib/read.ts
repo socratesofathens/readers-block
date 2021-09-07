@@ -1,5 +1,5 @@
 import { Board, Cursor, Game } from '../types'
-import BLOCK from './block'
+import BRICK from './brick'
 import cursorColumn from './cursor/column'
 
 interface Field {
@@ -16,16 +16,16 @@ export default function read (game: Game): Field {
     const rowIndex = game.board.length - reversedIndex - 1
     const above = rowIndex <= game.cursor.row
     if (above) {
-      const fallenRow = row.map((block, columnIndex) => {
+      const fallenRow = row.map((brick, columnIndex) => {
         const column = cursorColumn({
           cursor: game.cursor, column: columnIndex
         })
-        if (!column) return block
+        if (!column) return brick
 
         const aboveIndex = rowIndex - 1
         const aboveRow = game.board[aboveIndex]
         if (aboveRow == null) {
-          return BLOCK
+          return BRICK
         }
 
         const aboveLetter = aboveRow[columnIndex]

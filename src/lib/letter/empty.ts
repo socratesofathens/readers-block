@@ -1,7 +1,7 @@
-import { Block } from '../../types'
+import { Brick } from '../../types'
 import isLetter from './is'
 
-export default function isEmpty (element: Block): boolean {
+export default function isEmpty (element: Brick): boolean {
   const letter = isLetter(element)
 
   return !letter
