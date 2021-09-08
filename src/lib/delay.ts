@@ -18,5 +18,5 @@ export default function createDelay ({ game }: {
     return delay
   }
 
-  return 200
+  return 1000
 }

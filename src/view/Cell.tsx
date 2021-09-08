@@ -39,9 +39,7 @@ export default function CellView (
   })
 
   if (searching) {
-    console.log('cursor test:', cursor)
     if (cursor.invisible) {
-      console.log('invisible test:')
       return (
         <CellStyle>
           {brick.letter}

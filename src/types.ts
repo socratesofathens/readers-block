@@ -49,3 +49,14 @@ export interface Controller {
   game: Game
   setGame?: any
 }
+
+export type Control = number | null
+
+export interface Controls {
+  north: Control
+  south: Control
+  east: Control
+  west: Control
+  clock: Control
+  counter: Control
+}
