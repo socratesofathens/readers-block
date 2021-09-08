@@ -4,7 +4,7 @@ import { Cursor, Board } from '../../types'
 import positionAfter from '../after/position'
 import letterReverse from '../letter/reverse'
 
-export default function NewCursor ({ board }: { board: Board }): Cursor {
+export default function createCursor ({ board }: { board: Board }): Cursor {
   const position = positionAfter({ board, row: -1 })
   if (position == null) {
     return CURSOR

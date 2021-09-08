@@ -3,7 +3,7 @@ import { Board, Cursor } from '../../types'
 import letterAfter from '../letter/after'
 import letterReverse from '../letter/reverse'
 import positionAfter from '../after/position'
-import NewCursor from './new'
+import createCursor from './create'
 import CURSOR from '.'
 
 export default function moveCursor (
@@ -11,9 +11,9 @@ export default function moveCursor (
 ): Cursor {
   const defined = cursor.understanding.definition != null
   if (defined) {
-    const newCursor = NewCursor({ board })
+    const createdCursor = createCursor({ board })
 
-    return newCursor
+    return createdCursor
   }
 
   const row = board[cursor.row]

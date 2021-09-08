@@ -1,4 +1,4 @@
-import NewGame from '../lib/game/new'
+import NewGame from '../lib/game/create'
 
 import { Controller } from '../types'
 

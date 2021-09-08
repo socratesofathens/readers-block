@@ -1,6 +1,6 @@
 import { Board, Row } from '../../types'
 
-import NewBrick from '../brick/new'
+import NewBrick from '../brick/create'
 
 import BOARD_SIZE from './size'
 

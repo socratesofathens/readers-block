@@ -1,6 +1,6 @@
 import { Game } from '../../types'
 import positionAfter from '../after/position'
-import newBlock from '../block/new'
+import createBlock from '../block/create'
 import CURSOR from '../cursor'
 import lookupCursor from '../cursor/lookup'
 import moveCursor from '../cursor/move'
@@ -97,7 +97,7 @@ export default function nextGame (game: Game): Game {
   const cursor = lookupCursor(movedGame)
 
   const board = movedGame.board.map((row, rowIndex) => {
-    const newRow = row.map((brick, columnIndex) => {
+    const coloredRow = row.map((brick, columnIndex) => {
       const searching = cursorSearching({
         cursor, row: rowIndex, column: columnIndex
       })
@@ -117,7 +117,7 @@ export default function nextGame (game: Game): Game {
       return brick
     })
 
-    return newRow
+    return coloredRow
   })
 
   const movedHistory = [...movedGame.history, cursor]
@@ -133,15 +133,15 @@ export default function nextGame (game: Game): Game {
 
   if (cursor.invisible) {
     if (game.block == null) {
-      const block = newBlock()
+      const block = createBlock()
 
-      const newGame = { ...movedGame, board, cursor, history, words, block }
+      const blockGame = { ...movedGame, board, cursor, history, words, block }
 
-      return newGame
+      return blockGame
     }
   }
 
-  const newGame = { ...movedGame, board, cursor, history, words }
+  const nextGame = { ...movedGame, board, cursor, history, words }
 
-  return newGame
+  return nextGame
 }

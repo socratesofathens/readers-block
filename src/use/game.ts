@@ -3,46 +3,40 @@ import { useEffect, useState } from 'react'
 import { useControllerContext } from '../context/controller'
 
 import LookupCursor from '../lib/cursor/lookup'
-import NewCursor from '../lib/cursor/new'
+import createCursor from '../lib/cursor/create'
+import createDelay from '../lib/delay'
 
 import nextGame from '../lib/game/next'
-
-import interpret from '../lib/interpret'
 
 import { Game } from '../types'
 
 export default function useGame (): Game {
   const { game: controlled } = useControllerContext()
 
-  const newCursor = NewCursor(controlled)
-  const newGame = { ...controlled, cursor: newCursor }
-  const cursor = LookupCursor(newGame)
-  const history = [...newGame.history, cursor]
+  const createdCursor = createCursor(controlled)
+  const createdGame = { ...controlled, cursor: createdCursor }
 
-  const initial = { ...newGame, cursor, history }
+  const cursor = LookupCursor(createdGame)
+  const history = [...createdGame.history, cursor]
+
+  const initial = { ...createdGame, cursor, history }
 
   const [game, setGame] = useState(initial)
 
-  type Effecter = () => void
+  type Cleaner = () => void
 
-  function effect (): undefined | Effecter {
+  function effect (): Cleaner {
     function tick (): void {
       setGame?.(nextGame)
     }
 
-    const delay = game.block == null
-      ? interpret({
-        understanding: game.cursor.understanding,
-        is: 0,
-        not: 0,
-        already: 0,
-        empty: 20000
-      })
-      : 200
+    const delay = createDelay({ game })
 
     const interval = setInterval(tick, delay)
 
-    const clear = (): void => clearInterval(interval)
+    function clear (): void {
+      clearInterval(interval)
+    }
 
     return clear
   }
