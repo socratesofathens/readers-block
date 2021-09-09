@@ -1,23 +1,13 @@
 import { Game } from '../../types'
+
 import westBlock from '../block/west'
+
 import westBlocked from '../blocked/west'
 
+import moveGame from '../move/game'
+
 export default function westGame (game: Game): Game {
-  if (game.block == null) {
-    return game
-  }
+  const west = moveGame({ game, mover: westBlock, blocker: westBlocked })
 
-  const isBlocked = game
-    .block
-    .bricks
-    .some(brick => westBlocked({ brick, game }))
-
-  if (isBlocked) {
-    return game
-  }
-
-  const block = westBlock({ game })
-  const moved = { ...game, block }
-
-  return moved
+  return west
 }

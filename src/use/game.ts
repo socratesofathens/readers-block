@@ -26,7 +26,7 @@ export default function useGame (): Game {
 
   const [game, setGame] = useState(initial)
 
-  const { controlling, gamer } = useControls()
+  const { controlling, gamer, repeating } = useControls()
 
   function control (): Effect {
     function tick (): void {
@@ -38,18 +38,21 @@ export default function useGame (): Game {
 
       const delay = 100
 
-      const interval = setInterval(tick, delay)
+      if (repeating) {
+        const interval = setInterval(tick, delay)
 
-      const clear = (): void => {
-        clearInterval(interval)
+        const clear = (): void => {
+          clearInterval(interval)
+        }
+        return clear
       }
 
-      return clear
+      return undefined
     }
 
     return undefined
   }
-  useEffect(control, [controlling, gamer])
+  useEffect(control, [controlling, gamer, repeating])
 
   function effect (): Effect {
     function tick (): void {

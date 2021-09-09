@@ -1,22 +1,26 @@
-import { Block, Blocker, Game } from '../../types'
-import blockedGame from '../game/blocked'
+import { Block, Blocker, Game, Gamer } from '../../types'
 
-export default function moveGame ({ game, mover, blocker }: {
+import blockBlocked from '../block/blocked'
+
+import is from '../is'
+
+export default function moveGame ({
+  game, mover, blocker, spawner = is
+}: {
   game: Game
   mover: ({ game }: { game: Game }) => Block
   blocker: Blocker
+  spawner?: Gamer
 }): Game {
   if (game.block == null) {
     return game
   }
 
-  const isBlocked = game
-    .block
-    .bricks
-    .some(brick => blocker({ brick, game }))
+  const isBlocked = blockBlocked({ game, blocker })
 
   if (isBlocked) {
-    const blocked = blockedGame({ game })
+    // TODO block to spawn
+    const blocked = spawner(game)
 
     return blocked
   }

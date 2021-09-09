@@ -4,9 +4,7 @@ import CURSOR from '../cursor'
 import lookupCursor from '../cursor/lookup'
 import validReverse from '../reverse/valid'
 
-export default function blockedGame ({ game }: {
-  game: Game
-}): Game {
+export default function blockedGame (game: Game): Game {
   const board = JSON.parse(JSON.stringify(game.board))
   game.block?.bricks.forEach(brick => {
     if (brick.position != null) {
