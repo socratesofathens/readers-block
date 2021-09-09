@@ -40,13 +40,20 @@ export default function useGame (): Game {
   }
   useHotkeys('s,down', onDown, { keydown: true, keyup: true })
 
-  function control (): Cleaner | undefined {
+  type Cleaner = () => void
+  type Effect = Cleaner | undefined
+
+  function control (): Effect {
     function tick (): void {
       setGame?.(dropGame)
     }
 
     if (down) {
-      const interval = setInterval(tick, 200)
+      tick()
+
+      const delay = 2000
+
+      const interval = setInterval(tick, delay)
 
       const clear = (): void => {
         clearInterval(interval)
@@ -54,28 +61,32 @@ export default function useGame (): Game {
 
       return clear
     }
+
+    return undefined
   }
   useEffect(control, [down])
 
-  type Cleaner = () => void
-
-  function effect (): Cleaner {
+  function effect (): Effect {
     function tick (): void {
       setGame?.(nextGame)
     }
 
-    const delay = createDelay({ game })
+    if (!down) {
+      const delay = createDelay({ game })
 
-    const interval = setInterval(tick, delay)
+      const interval = setInterval(tick, delay)
 
-    function clear (): void {
-      clearInterval(interval)
+      const clear = (): void => {
+        clearInterval(interval)
+      }
+
+      return clear
     }
 
-    return clear
+    return undefined
   }
 
-  useEffect(effect, [game])
+  useEffect(effect, [game, down])
 
   return game
 }

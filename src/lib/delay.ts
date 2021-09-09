@@ -12,7 +12,7 @@ export default function createDelay ({ game }: {
       is: 0,
       not: 0,
       already: 0,
-      empty: 20000
+      empty: 0
     })
 
     return delay

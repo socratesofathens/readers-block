@@ -11,7 +11,9 @@ export default function lookupCursor (
 
   const empty = letters.includes('')
   if (empty) {
-    const emptyCursor = { ...cursor, understanding: { empty: true } }
+    const emptyCursor = {
+      ...cursor, understanding: { empty: true }, invisible: true
+    }
 
     return emptyCursor
   }
