@@ -5,13 +5,13 @@ import moveCursor from '../cursor/move'
 import cursorSearching from '../cursor/searching'
 import interpret from '../interpret'
 import read from '../read'
-import dropGame from './drop'
+import southGame from './south'
 
 export default function nextGame (game: Game): Game {
   if (game.block != null) {
-    const dropped = dropGame(game)
+    const south = southGame(game)
 
-    return dropped
+    return south
   }
 
   const { board: readBoard, cursor: readCursor } = read(game)

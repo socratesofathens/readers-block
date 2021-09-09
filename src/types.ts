@@ -60,3 +60,9 @@ export interface Controls {
   clock: Control
   counter: Control
 }
+
+export type Cleaner = () => void
+export type Effect = Cleaner | undefined
+
+export type Gamer = (game: Game) => Game
+export type Blocker = ({ brick, game }: { brick: Brick, game: Game }) => boolean

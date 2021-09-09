@@ -7,11 +7,11 @@ import LookupCursor from '../lib/cursor/lookup'
 
 import createDelay from '../lib/delay'
 
-import dropGame from '../lib/game/drop'
 import nextGame from '../lib/game/next'
 
-import { Game } from '../types'
-import { useHotkeys } from 'react-hotkeys-hook'
+import { Effect, Game } from '../types'
+
+import useControls from './controls'
 
 export default function useGame (): Game {
   const { game: controlled } = useControllerContext()
@@ -26,32 +26,17 @@ export default function useGame (): Game {
 
   const [game, setGame] = useState(initial)
 
-  const [down, setDown] = useState(false)
-  function onDown (event: KeyboardEvent): void {
-    const isDown = event.type === 'keydown'
-    if (isDown) {
-      setDown(true)
-    }
-
-    const isUp = event.type === 'keyup'
-    if (isUp) {
-      setDown(false)
-    }
-  }
-  useHotkeys('s,down', onDown, { keydown: true, keyup: true })
-
-  type Cleaner = () => void
-  type Effect = Cleaner | undefined
+  const { controlling, gamer } = useControls()
 
   function control (): Effect {
     function tick (): void {
-      setGame?.(dropGame)
+      setGame?.(gamer)
     }
 
-    if (down) {
+    if (controlling) {
       tick()
 
-      const delay = 2000
+      const delay = 100
 
       const interval = setInterval(tick, delay)
 
@@ -64,14 +49,14 @@ export default function useGame (): Game {
 
     return undefined
   }
-  useEffect(control, [down])
+  useEffect(control, [controlling, gamer])
 
   function effect (): Effect {
     function tick (): void {
       setGame?.(nextGame)
     }
 
-    if (!down) {
+    if (!controlling || !game.cursor.invisible) {
       const delay = createDelay({ game })
 
       const interval = setInterval(tick, delay)
@@ -86,7 +71,7 @@ export default function useGame (): Game {
     return undefined
   }
 
-  useEffect(effect, [game, down])
+  useEffect(effect, [game, controlling])
 
   return game
 }

@@ -10,8 +10,7 @@ export default function blockedGame ({ game }: {
   const board = JSON.parse(JSON.stringify(game.board))
   game.block?.bricks.forEach(brick => {
     if (brick.position != null) {
-      const y = brick.position.y + 1
-      const row = board[y]
+      const row = board[brick.position.y]
       const cell = row[brick.position.x]
 
       cell.letter = brick.letter

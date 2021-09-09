@@ -1,10 +1,10 @@
 import { Brick, Game } from '../../types'
 
-export default function brickBlocked ({ brick, game }: {
+export default function southBlocked ({ brick, game }: {
   brick: Brick
   game: Game
 }): boolean {
-  if (brick == null || brick.position == null) {
+  if (brick.position == null) {
     return false
   }
 
@@ -17,5 +17,13 @@ export default function brickBlocked ({ brick, game }: {
 
   const cell = row[brick.position.x]
 
-  return cell.letter != null && cell.letter !== ''
+  if (cell.letter == null) {
+    return false
+  }
+
+  if (cell.letter === '') {
+    return false
+  }
+
+  return true
 }
