@@ -1,5 +1,5 @@
 import { Brick, Game } from '../../types'
-import brickBlocked from './blocked'
+import brickBlocked from './brick'
 
 export default function westBlocked ({ brick, game }: {
   brick: Brick
