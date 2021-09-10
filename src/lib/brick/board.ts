@@ -6,7 +6,7 @@ import BRICK from '.'
 
 export default function boardBrick (): Brick {
   const emptyRandom = Math.random()
-  const empty = emptyRandom > 0.01
+  const empty = emptyRandom > 0.00
   if (empty) return BRICK
 
   const letter = letterBrick()

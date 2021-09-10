@@ -1,4 +1,5 @@
 import { Brick, Game } from '../../types'
+import brickBlocked from './blocked'
 
 export default function southBlocked ({ brick, game }: {
   brick: Brick
@@ -17,13 +18,7 @@ export default function southBlocked ({ brick, game }: {
 
   const cell = row[brick.position.x]
 
-  if (cell.letter == null) {
-    return false
-  }
+  const blocked = brickBlocked(cell)
 
-  if (cell.letter === '') {
-    return false
-  }
-
-  return true
+  return blocked
 }

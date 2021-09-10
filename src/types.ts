@@ -19,6 +19,7 @@ export type Results = Cursor[]
 export interface Position {
   x: number
   y: number
+  [key: string]: number
 }
 
 export interface Brick {

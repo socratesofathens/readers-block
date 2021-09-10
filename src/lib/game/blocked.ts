@@ -34,6 +34,13 @@ export default function blockedGame (game: Game): Game {
   }
 
   const cursor = lookupCursor(blockedGame)
+  const history = [...blockedGame.history, cursor]
 
-  return { ...blockedGame, cursor }
+  const notDefined = cursor.understanding.definition == null
+
+  const words = notDefined
+    ? blockedGame.words
+    : [...blockedGame.words, cursor]
+
+  return { ...blockedGame, cursor, history, words }
 }
