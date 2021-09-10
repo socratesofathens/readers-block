@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { useControllerContext } from '../context/controller'
 
 import createCursor from '../lib/cursor/create'
-import LookupCursor from '../lib/cursor/lookup'
+import lookupCursor from '../lib/cursor/lookup'
 
 import createDelay from '../lib/delay'
 
@@ -19,10 +19,16 @@ export default function useGame (): Game {
   const createdCursor = createCursor(controlled)
   const createdGame = { ...controlled, cursor: createdCursor }
 
-  const cursor = LookupCursor(createdGame)
+  const cursor = lookupCursor(createdGame)
   const history = [...createdGame.history, cursor]
 
-  const initial = { ...createdGame, cursor, history }
+  const notDefined = cursor.understanding.definition == null
+
+  const words = notDefined
+    ? createdGame.words
+    : [...createdGame.words, cursor]
+
+  const initial = { ...createdGame, cursor, history, words }
 
   const [game, setGame] = useState(initial)
 

@@ -14,6 +14,9 @@ export default function CellView (
     block?: Block
   }
 ): JSX.Element {
+  const row = board[rowIndex]
+  const brick = row[columnIndex]
+
   if (block != null) {
     const blockBrick = block.bricks.find(brick => {
       const y = brick.position?.y === rowIndex
@@ -31,17 +34,22 @@ export default function CellView (
     }
   }
 
-  const row = board[rowIndex]
-  const brick = row[columnIndex]
-
   const searching = cursorSearching({
     cursor, column: columnIndex, row: rowIndex
   })
 
   if (searching) {
     if (cursor.invisible) {
+      const color = interpret({
+        understanding: cursor.understanding,
+        is: brick.color,
+        not: 'lightcoral',
+        already: 'lightyellow',
+        empty: brick.color
+      })
+
       return (
-        <CellStyle>
+        <CellStyle color={color}>
           {brick.letter}
         </CellStyle>
       )
@@ -82,13 +90,21 @@ export default function CellView (
     )
   }
 
+  const color = interpret({
+    understanding: result.understanding,
+    is: brick.color,
+    not: 'lightcoral',
+    already: 'lightyellow',
+    empty: brick.color
+  })
+
   const title = searching
     ? result?.understanding.definition
     : undefined
 
   return (
     <CellStyle
-      color={brick.color}
+      color={color}
       title={title}
     >
       {brick.letter}
