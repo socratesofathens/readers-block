@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 
 import { useControllerContext } from '../context/controller'
-import BRICK from '../lib/brick'
 
 import createCursor from '../lib/cursor/create'
 import lookupCursor from '../lib/cursor/lookup'

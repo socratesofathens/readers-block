@@ -29,7 +29,9 @@ export default function lookupCursor (
     return alreadyCursor
   }
 
-  const definition = define({ word })
+  const definition = word.length > 1
+    ? define({ word })
+    : undefined
 
   const understanding = {
     word,

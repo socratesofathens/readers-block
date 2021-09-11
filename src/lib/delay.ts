@@ -9,9 +9,9 @@ export default function createDelay ({ game }: {
   if (unblocked) {
     const delay = interpret({
       understanding: game.cursor.understanding,
-      is: 250,
-      not: 200,
-      already: 100,
+      is: 0,
+      not: 0,
+      already: 0,
       empty: 0
     })
 

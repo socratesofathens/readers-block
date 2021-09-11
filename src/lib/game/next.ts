@@ -65,22 +65,22 @@ export default function nextGame (game: Game): Game {
       const block = createBlock()
 
       let empty = true
-      let clearedBoard = [...game.board]
+      let clearBoard = [...game.board]
       while (empty) {
-        const clearIndex = game.board.findIndex((row, index) => {
+        const fullIndex = clearBoard.findIndex((row, index) => {
           const empty = row.some(cell => {
             const empty = cell.letter == null || cell.letter === ''
 
             return empty
           })
 
-          return empty
+          return !empty
         })
 
-        if (clearIndex > -1) {
-          clearedBoard = clearedBoard.map((row, index) => {
-            if (index >= clearIndex) {
-              const above = clearedBoard[index - 1]
+        if (fullIndex > -1) {
+          const clearerBoard = clearBoard.map((row, index) => {
+            if (index <= fullIndex) {
+              const above = clearBoard[index - 1]
 
               if (above == null) {
                 const blankRow = Array.from({ length: row.length }, () => BRICK)
@@ -93,12 +93,14 @@ export default function nextGame (game: Game): Game {
 
             return row
           })
+
+          clearBoard = clearerBoard
         } else {
           empty = false
         }
       }
 
-      const blockGame = { ...movedGame, board: clearedBoard, cursor, history, words, block }
+      const blockGame = { ...movedGame, board: clearBoard, cursor, history, words, block }
 
       return blockGame
     }
