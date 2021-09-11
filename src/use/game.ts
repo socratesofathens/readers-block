@@ -40,7 +40,6 @@ export default function useGame (): Game {
 
   function control (): Effect {
     const setters = gameGamers({ north, south, east, west, clock, counter })
-    console.log('setters test:', setters)
 
     function set (game: Game): Game {
       let newGame = { ...game }

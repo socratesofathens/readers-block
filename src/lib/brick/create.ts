@@ -2,7 +2,7 @@ import { Brick, Position } from '../../types'
 
 import BRICK from '.'
 
-export default function newBrick (options?: {
+export default function createBrick (options?: {
   letter?: string
   color?: string
   position?: Position

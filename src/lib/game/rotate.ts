@@ -11,6 +11,10 @@ export default function rotateGame ({ game, rotation }: {
     return game
   }
 
+  if (game.block.shape === 'O') {
+    return game
+  }
+
   const center = game.block.bricks[2]
 
   const rotator = brickRotator({ center, rotation })

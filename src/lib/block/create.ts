@@ -1,11 +1,26 @@
-import { Block } from '../../types'
+import { Block, Brick } from '../../types'
 
 import blockBrick from '../brick/block'
 
+import shapes from '../shapes'
+
 import BLOCK from '.'
 
-export default function newBlock (): Block {
-  const bricks = Array.from({ length: 4 }, blockBrick)
+export default function createBlock (): Block {
+  const keys = Object.keys(shapes)
+  const chaos = Math.random()
+  const random = chaos * keys.length
+  const index = Math.floor(random)
+  const shape = keys[index]
+  console.log('shape test:', shape)
 
-  return { ...BLOCK, bricks }
+  function createBrick (value: unknown, index: number): Brick {
+    const brick = blockBrick({ shape, index })
+
+    return brick
+  }
+
+  const bricks = Array.from({ length: 4 }, createBrick)
+
+  return { ...BLOCK, bricks, shape }
 }

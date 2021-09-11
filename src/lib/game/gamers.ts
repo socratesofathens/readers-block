@@ -21,16 +21,18 @@ export default function gameGamers ({
     gamers.push(dropGame)
   }
 
-  if (south) {
-    gamers.push(southGame)
-  }
-
   if (east && !west) {
     gamers.push(eastGame)
   }
 
   if (west && !east) {
     gamers.push(westGame)
+  }
+
+  const horizontal = west || east
+
+  if (south && !horizontal) {
+    gamers.push(southGame)
   }
 
   if (clock) {
