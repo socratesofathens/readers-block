@@ -12,10 +12,32 @@ export default function rotateGame ({ game, rotation }: {
   }
 
   if (game.block.shape === 'O') {
-    return game
+    const bricks = game.block.bricks.map((brick, index) => {
+      const other = index + 1
+      if (game.block == null) {
+        return brick
+      }
+      const nextIndex = other % game.block?.bricks.length
+      const nextBrick = game.block.bricks[nextIndex]
+
+      if (nextBrick.position === null) {
+        return brick
+      }
+
+      return { ...brick, position: nextBrick.position }
+    })
+
+    const block = { ...game.block, bricks }
+    const rotated = { ...game, block }
+
+    return rotated
   }
 
   const center = game.block.bricks[2]
+
+  // if (game.block.shape === 'I') {
+  //   rotation = vectorMultiply({ a: rotation, b: { x: -1, y: -1 } })
+  // }
 
   const rotator = brickRotator({ center, rotation })
   const positions = game.block.bricks.map(rotator)

@@ -10,8 +10,8 @@ export default function createDelay ({ game }: {
     const delay = interpret({
       understanding: game.cursor.understanding,
       is: 250,
-      not: 0,
-      already: 0,
+      not: 200,
+      already: 100,
       empty: 0
     })
 

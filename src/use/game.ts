@@ -34,18 +34,17 @@ export default function useGame (): Game {
   const [game, setGame] = useState(initial)
 
   const {
-    controlling, gamer, repeating,
-    north, south, east, west, clock, counter
+    controlling, repeating, north, south, east, west, clock, counter
   } = useControls()
 
   function control (): Effect {
-    const setters = gameGamers({ north, south, east, west, clock, counter })
+    const gamers = gameGamers({ north, south, east, west, clock, counter })
 
     function set (game: Game): Game {
       let newGame = { ...game }
 
-      setters.forEach(setter => {
-        const newerGame = setter(newGame)
+      gamers.forEach(gamer => {
+        const newerGame = gamer(newGame)
 
         newGame = newerGame
       })
@@ -76,7 +75,7 @@ export default function useGame (): Game {
 
     return undefined
   }
-  useEffect(control, [controlling, gamer, north, south, east, west, clock, counter, repeating])
+  useEffect(control, [controlling, north, south, east, west, clock, counter, repeating])
 
   function effect (): Effect {
     function tick (): void {

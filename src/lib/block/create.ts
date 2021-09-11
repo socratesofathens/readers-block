@@ -12,7 +12,6 @@ export default function createBlock (): Block {
   const random = chaos * keys.length
   const index = Math.floor(random)
   const shape = keys[index]
-  console.log('shape test:', shape)
 
   function createBrick (value: unknown, index: number): Brick {
     const brick = blockBrick({ shape, index })

@@ -1,5 +1,5 @@
-export const BOARD_WIDTH = 13
-export const BOARD_HEIGHT = 20
+export const BOARD_WIDTH = 7
+export const BOARD_HEIGHT = 15
 
 const BOARD_SIZE = {
   width: BOARD_WIDTH,

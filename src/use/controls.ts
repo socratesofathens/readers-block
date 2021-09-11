@@ -1,10 +1,10 @@
-import gameGamer from '../lib/game/gamer'
+import gameGamers from '../lib/game/gamers'
 import { Gamer } from '../types'
 import useControl from './control'
 
 interface Controls {
   controlling: boolean
-  gamer: Gamer
+  gamers: Gamer[]
   repeating: boolean
   north: boolean
   south: boolean
@@ -19,15 +19,15 @@ export default function useControls (): Controls {
   const south = useControl('s')
   const east = useControl('d')
   const west = useControl('a')
-  const clock = useControl('q')
-  const counter = useControl('e')
+  const clock = useControl('e')
+  const counter = useControl('q')
 
   const repeating = south || east || west
   const controlling = north || repeating || clock || counter
 
-  const gamer = gameGamer({ north, south, east, west, clock, counter })
+  const gamers = gameGamers({ north, south, east, west, clock, counter })
 
   return {
-    controlling, gamer, repeating, north, south, east, west, clock, counter
+    controlling, gamers, repeating, north, south, east, west, clock, counter
   }
 }

@@ -1,4 +1,5 @@
 import { Position } from '../types'
+import { BOARD_WIDTH } from './board/size'
 
 type Positions = Position[]
 
@@ -6,53 +7,58 @@ interface Shapes {
   [key: string]: Positions
 }
 
+const middle = BOARD_WIDTH / 2
+const center = Math.floor(middle)
+const left = center - 1
+const right = center + 1
+
 const J = [
-  { x: 5, y: 0 },
-  { x: 5, y: 1 },
-  { x: 6, y: 1 },
-  { x: 7, y: 1 }
+  { x: left, y: 0 },
+  { x: left, y: 1 },
+  { x: center, y: 1 },
+  { x: right, y: 1 }
 ]
 
 const L = [
-  { x: 7, y: 0 },
-  { x: 5, y: 1 },
-  { x: 6, y: 1 },
-  { x: 7, y: 1 }
+  { x: right, y: 0 },
+  { x: left, y: 1 },
+  { x: center, y: 1 },
+  { x: right, y: 1 }
 ]
 
 const I = [
-  { x: 6, y: 0 },
-  { x: 6, y: 1 },
-  { x: 6, y: 2 },
-  { x: 6, y: 3 }
+  { x: center, y: 0 },
+  { x: center, y: 1 },
+  { x: center, y: 2 },
+  { x: center, y: 3 }
 ]
 
 const O = [
-  { x: 6, y: 0 },
-  { x: 7, y: 1 },
-  { x: 6, y: 0 },
-  { x: 7, y: 1 }
+  { x: center, y: 0 },
+  { x: right, y: 0 },
+  { x: right, y: 1 },
+  { x: center, y: 1 }
 ]
 
 const S = [
-  { x: 6, y: 0 },
-  { x: 7, y: 0 },
-  { x: 6, y: 1 },
-  { x: 5, y: 1 }
+  { x: center, y: 0 },
+  { x: right, y: 0 },
+  { x: center, y: 1 },
+  { x: left, y: 1 }
 ]
 
 const Z = [
-  { x: 6, y: 0 },
-  { x: 5, y: 0 },
-  { x: 6, y: 1 },
-  { x: 7, y: 1 }
+  { x: center, y: 0 },
+  { x: left, y: 0 },
+  { x: center, y: 1 },
+  { x: right, y: 1 }
 ]
 
 const T = [
-  { x: 5, y: 1 },
-  { x: 6, y: 0 },
-  { x: 6, y: 1 },
-  { x: 7, y: 1 }
+  { x: center, y: 1 },
+  { x: right, y: 0 },
+  { x: right, y: 1 },
+  { x: left, y: 1 }
 ]
 const shapes: Shapes = { J, L, I, O, S, Z, T }
 
