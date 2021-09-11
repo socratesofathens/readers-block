@@ -1,24 +1,20 @@
 import { useState } from 'react'
-import { useHotkeys } from 'react-hotkeys-hook'
+import useMousetrap from 'react-hook-mousetrap'
+
+const m = useMousetrap as any
 
 export default function useControl (keys: string): boolean {
   const [pressed, setPressed] = useState(false)
 
-  function onPress (event: KeyboardEvent): void {
-    const isDown = event.type === 'keydown'
-    if (isDown) {
-      setPressed(true)
-    }
-
-    const isUp = event.type === 'keyup'
-    if (isUp) {
-      setPressed(false)
-    }
+  function onDown (): void {
+    setPressed(true)
   }
+  m(keys, onDown)
 
-  const options = { keydown: true, keyup: true }
-
-  useHotkeys(keys, onPress, options)
+  function onUp (): void {
+    setPressed(false)
+  }
+  m(keys, onUp, 'keyup')
 
   return pressed
 }

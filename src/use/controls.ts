@@ -6,13 +6,19 @@ interface Controls {
   controlling: boolean
   gamer: Gamer
   repeating: boolean
+  north: boolean
+  south: boolean
+  east: boolean
+  west: boolean
+  clock: boolean
+  counter: boolean
 }
 
 export default function useControls (): Controls {
-  const north = useControl('w,up')
-  const south = useControl('s,down')
-  const east = useControl('d,right')
-  const west = useControl('a,left')
+  const north = useControl('w')
+  const south = useControl('s')
+  const east = useControl('d')
+  const west = useControl('a')
   const clock = useControl('q')
   const counter = useControl('e')
 
@@ -21,5 +27,7 @@ export default function useControls (): Controls {
 
   const gamer = gameGamer({ north, south, east, west, clock, counter })
 
-  return { controlling, gamer, repeating }
+  return {
+    controlling, gamer, repeating, north, south, east, west, clock, counter
+  }
 }

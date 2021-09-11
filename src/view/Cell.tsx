@@ -14,9 +14,6 @@ export default function CellView (
     block?: Block
   }
 ): JSX.Element {
-  const row = board[rowIndex]
-  const brick = row[columnIndex]
-
   if (block != null) {
     const blockBrick = block.bricks.find(brick => {
       const y = brick.position?.y === rowIndex
@@ -33,6 +30,9 @@ export default function CellView (
       )
     }
   }
+
+  const row = board[rowIndex]
+  const brick = row[columnIndex]
 
   const searching = cursorSearching({
     cursor, column: columnIndex, row: rowIndex

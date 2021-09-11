@@ -6,6 +6,7 @@ import createCursor from '../lib/cursor/create'
 import lookupCursor from '../lib/cursor/lookup'
 
 import createDelay from '../lib/delay'
+import gameGamers from '../lib/game/gamers'
 
 import nextGame from '../lib/game/next'
 
@@ -32,11 +33,29 @@ export default function useGame (): Game {
 
   const [game, setGame] = useState(initial)
 
-  const { controlling, gamer, repeating } = useControls()
+  const {
+    controlling, gamer, repeating,
+    north, south, east, west, clock, counter
+  } = useControls()
 
   function control (): Effect {
+    const setters = gameGamers({ north, south, east, west, clock, counter })
+    console.log('setters test:', setters)
+
+    function set (game: Game): Game {
+      let newGame = { ...game }
+
+      setters.forEach(setter => {
+        const newerGame = setter(newGame)
+
+        newGame = newerGame
+      })
+
+      return newGame
+    }
+
     function tick (): void {
-      setGame?.(gamer)
+      setGame?.(set)
     }
 
     if (controlling) {
@@ -58,14 +77,14 @@ export default function useGame (): Game {
 
     return undefined
   }
-  useEffect(control, [controlling, gamer, repeating])
+  useEffect(control, [controlling, gamer, north, south, east, west, clock, counter, repeating])
 
   function effect (): Effect {
     function tick (): void {
       setGame?.(nextGame)
     }
 
-    if (!controlling || !game.cursor.invisible) {
+    if (!controlling) {
       const delay = createDelay({ game })
 
       const interval = setInterval(tick, delay)
