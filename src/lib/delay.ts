@@ -9,14 +9,14 @@ export default function createDelay ({ game }: {
   if (unblocked) {
     const delay = interpret({
       understanding: game.cursor.understanding,
-      is: 0,
-      not: 0,
-      already: 0,
+      is: 250,
+      not: 200,
+      already: 250,
       empty: 0
     })
 
     return delay
   }
 
-  return 1000
+  return 500
 }

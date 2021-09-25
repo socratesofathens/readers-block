@@ -40,16 +40,8 @@ export default function CellView (
 
   if (searching) {
     if (cursor.invisible) {
-      const color = interpret({
-        understanding: cursor.understanding,
-        is: brick.color,
-        not: 'lightcoral',
-        already: 'lightyellow',
-        empty: brick.color
-      })
-
       return (
-        <CellStyle color={color}>
+        <CellStyle>
           {brick.letter}
         </CellStyle>
       )
@@ -90,21 +82,12 @@ export default function CellView (
     )
   }
 
-  const color = interpret({
-    understanding: result.understanding,
-    is: brick.color,
-    not: 'lightcoral',
-    already: 'lightyellow',
-    empty: brick.color
-  })
-
   const title = searching
     ? result?.understanding.definition
     : undefined
 
   return (
     <CellStyle
-      color={color}
       title={title}
     >
       {brick.letter}

@@ -36,29 +36,29 @@ const I = [
 const O = [
   { x: center, y: 0 },
   { x: right, y: 0 },
-  { x: right, y: 1 },
-  { x: center, y: 1 }
+  { x: center, y: 1 },
+  { x: right, y: 1 }
 ]
 
 const S = [
   { x: center, y: 0 },
   { x: right, y: 0 },
-  { x: center, y: 1 },
-  { x: left, y: 1 }
+  { x: left, y: 1 },
+  { x: center, y: 1 }
 ]
 
 const Z = [
-  { x: center, y: 0 },
   { x: left, y: 0 },
+  { x: center, y: 0 },
   { x: center, y: 1 },
   { x: right, y: 1 }
 ]
 
 const T = [
+  { x: center, y: 0 },
+  { x: left, y: 1 },
   { x: center, y: 1 },
-  { x: right, y: 0 },
-  { x: right, y: 1 },
-  { x: left, y: 1 }
+  { x: right, y: 1 }
 ]
 const shapes: Shapes = { J, L, I, O, S, Z, T }
 

@@ -15,19 +15,28 @@ interface Controls {
 }
 
 export default function useControls (): Controls {
-  const north = useControl('w')
-  const south = useControl('s')
-  const east = useControl('d')
-  const west = useControl('a')
-  const clock = useControl('e')
-  const counter = useControl('q')
+  const up = useControl('up')
+  const down = useControl('down')
+  const left = useControl('left')
+  const right = useControl('right')
+  const w = useControl('w')
+  const a = useControl('a')
+  const s = useControl('s')
+  const d = useControl('d')
 
-  const repeating = south || east || west
-  const controlling = north || repeating || clock || counter
+  const south = down || s
 
-  const gamers = gameGamers({ north, south, east, west, clock, counter })
+  const west = left || a
+  const east = right || d
+
+  const clock = up || w
+
+  const repeating = east || west || south
+  const controlling = repeating || clock
+
+  const gamers = gameGamers({ north: false, south, east, west, clock, counter: false })
 
   return {
-    controlling, gamers, repeating, north, south, east, west, clock, counter
+    controlling, gamers, repeating, north: false, south, east, west, clock, counter: false
   }
 }

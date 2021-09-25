@@ -82,7 +82,7 @@ export default function useGame (): Game {
       setGame?.(nextGame)
     }
 
-    if (!controlling) {
+    if (!game.cursor.invisible || game.block == null) {
       const delay = createDelay({ game })
 
       const interval = setInterval(tick, delay)
@@ -98,6 +98,8 @@ export default function useGame (): Game {
   }
 
   useEffect(effect, [game, controlling])
+
+  console.log('game test:', game)
 
   return game
 }

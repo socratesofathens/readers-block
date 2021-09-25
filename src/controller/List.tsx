@@ -1,5 +1,6 @@
 import { useGameContext } from '../context/game'
 import ListStyle from '../style/List'
+import TitleStyle from '../style/Title'
 import { Understanding } from '../types'
 
 import ItemView from '../view/Item'
@@ -49,5 +50,10 @@ export default function ListController (): JSX.Element {
     return item
   })
 
-  return <ListStyle>{items}</ListStyle>
+  return (
+    <ListStyle>
+      <TitleStyle length={items.length}>Words ({items.length} / 10)</TitleStyle>
+      {items}
+    </ListStyle>
+  )
 }

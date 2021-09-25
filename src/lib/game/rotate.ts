@@ -33,7 +33,9 @@ export default function rotateGame ({ game, rotation }: {
     return rotated
   }
 
-  const center = game.block.bricks[2]
+  const center = game.block.shape === 'S'
+    ? game.block.bricks[3]
+    : game.block.bricks[2]
 
   // if (game.block.shape === 'I') {
   //   rotation = vectorMultiply({ a: rotation, b: { x: -1, y: -1 } })

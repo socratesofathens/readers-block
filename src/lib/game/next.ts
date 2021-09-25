@@ -9,12 +9,6 @@ import read from '../read'
 import southGame from './south'
 
 export default function nextGame (game: Game): Game {
-  if (game.block != null) {
-    const south = southGame(game)
-
-    return south
-  }
-
   const { board: readBoard, cursor: readCursor } = read(game)
   const readGame = {
     ...game, board: readBoard, cursor: readCursor
@@ -60,12 +54,14 @@ export default function nextGame (game: Game): Game {
     ? movedHistory
     : movedHistory.filter(cursor => cursor.understanding.definition)
 
+  console.log('game test:', game)
+
   if (cursor.invisible) {
     if (game.block == null) {
       const block = createBlock()
 
       let empty = true
-      let clearBoard = [...game.board]
+      let clearBoard = [...board]
       while (empty) {
         const fullIndex = clearBoard.findIndex((row, index) => {
           const empty = row.some(cell => {
