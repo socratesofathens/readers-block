@@ -6,7 +6,6 @@ import moveCursor from '../cursor/move'
 import cursorSearching from '../cursor/searching'
 import interpret from '../interpret'
 import read from '../read'
-import southGame from './south'
 
 export default function nextGame (game: Game): Game {
   const { board: readBoard, cursor: readCursor } = read(game)
@@ -74,9 +73,10 @@ export default function nextGame (game: Game): Game {
         })
 
         if (fullIndex > -1) {
+          const copy = [...clearBoard]
           const clearerBoard = clearBoard.map((row, index) => {
             if (index <= fullIndex) {
-              const above = clearBoard[index - 1]
+              const above = copy[index - 1]
 
               if (above == null) {
                 const blankRow = Array.from({ length: row.length }, () => BRICK)

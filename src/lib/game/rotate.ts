@@ -3,6 +3,26 @@ import brickBlocked from '../blocked/brick'
 
 import brickRotator from '../brick/rotator'
 
+function rotateO (index: number): number {
+  if (index === 0) {
+    return 1
+  }
+
+  if (index === 1) {
+    return 3
+  }
+
+  if (index === 2) {
+    return 0
+  }
+
+  if (index === 3) {
+    return 2
+  }
+
+  throw new Error('Invalid index')
+}
+
 export default function rotateGame ({ game, rotation }: {
   game: Game
   rotation: Position
@@ -13,11 +33,10 @@ export default function rotateGame ({ game, rotation }: {
 
   if (game.block.shape === 'O') {
     const bricks = game.block.bricks.map((brick, index) => {
-      const other = index + 1
       if (game.block == null) {
         return brick
       }
-      const nextIndex = other % game.block?.bricks.length
+      const nextIndex = rotateO(index)
       const nextBrick = game.block.bricks[nextIndex]
 
       if (nextBrick.position === null) {

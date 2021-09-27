@@ -7,4 +7,5 @@ export default styled(BoxStyle)`
   display: flex;
   align-items: center;
   justify-content: center;
+  aspect-ratio: 1 / 1;
 `

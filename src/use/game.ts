@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react'
 
-import { useControllerContext } from '../context/controller'
-
 import createCursor from '../lib/cursor/create'
 import lookupCursor from '../lib/cursor/lookup'
 
 import createDelay from '../lib/delay'
+import createGame from '../lib/game/create'
 import gameGamers from '../lib/game/gamers'
 
 import nextGame from '../lib/game/next'
@@ -15,7 +14,7 @@ import { Effect, Game } from '../types'
 import useControls from './controls'
 
 export default function useGame (): Game {
-  const { game: controlled } = useControllerContext()
+  const controlled = createGame()
 
   const createdCursor = createCursor(controlled)
   const createdGame = { ...controlled, cursor: createdCursor }
